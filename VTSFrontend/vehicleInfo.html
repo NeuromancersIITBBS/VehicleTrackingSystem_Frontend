@@ -1,0 +1,69 @@
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <title>Vehicle Map</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 400px;  /* The height is 400 pixels */
+            width: 100%;  /* The width is the width of the web page */
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div class=" container-fluid bg-dark text-center" id="JumboHeading">
+    <div class="container text-white">
+        <a href="index.html" style=" color: #ffffff">
+            <div class="display-4">
+                Vehicle Tracking System
+            </div>
+        </a>
+    </div>
+</div>
+<div id="loadingData" class="bg-warning text-white text-center display-4">
+    waiting for data
+</div>
+<div id="seatsAvailable" class="bg-info text-white text-center display-5" style="display: none">
+    Seats available
+</div>
+
+
+<script>
+</script>
+
+<script src="views/mapInit.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJKV1bs7RogqpcMvvSuSLTDPB19lPR5dI&callback=initMap"
+        async defer></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
+
+<script src="models/vehicleDataModel.js"></script>
+<script src="models/modelInit.js"></script>
+<script src="controllers/controllerUtils.js"></script>
+<script src = controllers/seatOccupancyController.js></script>
+<script src = "controllers/locationController.js"></script>
+<script src="views/mapView.js"></script>
+</body>
+</html>

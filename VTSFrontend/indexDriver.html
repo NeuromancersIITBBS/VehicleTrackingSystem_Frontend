@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+    <script src="./driver.js"></script>
+    <title>WebSockets 101</title>
+</head>
+<body>
+    <div id="currLocation">
+        <p><strong>Lat: </strong> <span id="latVal"></span></p> 
+        <p><strong>Lng: </strong> <span id="lngVal"></span></p>
+    </div>
+    <button id="getLocation">Update Location</button>
+    <div id="manualLocationForm">
+        <label for="manualID">ID: </label>
+        <input type="number" id="manualID"><br>
+        <label for="manualLat">Lat: </label>
+        <input type="text" id="manualLat"><br>
+        <label for="manualLng">Lng: </label>
+        <input type="text" id="manualLng"><br>
+        <button id="manualLocation">Update Manually</button>
+        <br><br>
+        <button id="updateAllBtn">Update All 3</button>
+    </div>
+</body>
+</html>
