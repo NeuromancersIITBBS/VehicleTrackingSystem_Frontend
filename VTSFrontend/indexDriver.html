@@ -2,8 +2,11 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+
+    <!-- jQuery -->
+    <script  src="https://code.jquery.com/jquery-3.4.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="  crossorigin="anonymous"></script>
     <script src="./driver.js"></script>
-    <title>WebSockets 101</title>
+    <title>Vehicle Tracking System</title>
 </head>
 <body>
     <div id="currLocation">
@@ -21,6 +24,13 @@
         <button id="manualLocation">Update Manually</button>
         <br><br>
         <button id="updateAllBtn">Update All 3</button>
+    </div>
+    <div class="update">
+        <label for="occupiedSeats">No.of OccupiedSeats </label>
+        <input type="number" id="occupiedSeats"><br>
+        <label for="setDestination">Enter the final Destination:</label>
+        <input type="text" id="setDestination"><br>
+        <button id="updateDriverInfoBtn">Update the information</button>
     </div>
 </body>
 </html>
