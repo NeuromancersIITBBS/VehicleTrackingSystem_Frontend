@@ -22,7 +22,7 @@ socket.on('location', (data) => {
 currLocationBtn.addEventListener('click', getLocation);
 manualLocationBtn.addEventListener('click', manualLocation);
 updateAllBtn.addEventListener('click', updateAll);
-
+updateDriverInfoBtn.addEventListener('click', updateDriverInfo);
 };
 
 // Updates locations filled manually in input fiels (For testing only!)
@@ -90,4 +90,24 @@ function updateAll(){
         socket.emit('location', location)
     });
 
+}
+
+
+//function to update the driver's occupiedseats and final destination (ajax POST)
+function updateDriverInfo(occupiedseats,colorcode){   //colorcode needs to be implemented properly
+    console.log(occupiedseats);
+    let endpoint=`http:\\vts_backend`;
+    let data = {occupiedSeats : occupiedseats, colorCode : colorcode}
+    $.ajax({
+        url: endpoint,
+        method: 'POST',
+        data:JSON.stringify(data),
+        contentType : "application/json",
+        error: function(xhr){
+          alert("Something went wrong, please try again.");
+        },
+        success: function(res) {
+          console.log("Success!");   
+        }
+  });
 }
