@@ -47,71 +47,83 @@
 
 </head>
 <body>
-
-    <div class="container-fluid" id="navBar">
-    </div>
-    <div class="container">
-        <div id="map"></div>
-    </div>
-    <div class="container-fluid" id="bovDetails">
-      <div class="row">
-        <div class="col-sm" id="bov1" style="text-align:center; background-color:white">
-
-        </div>
-        <div class="col-sm" id="bov2" style="text-align: center; background-color:white; color:green">
-
-        </div>
-        <div class="col-sm" id="bov3" style="text-align: center; background-color:white; color:blue">
-
-        </div>
+  <div class="container-fluid" id="navBar">
+  </div>
+  <div class="container">
+      <div id="map"></div>
+  </div>
+  <div class="container-fluid" id="bovDetails">
+    <div class="row">
+      <div class="col-sm" id="bov1" style="text-align:center; background-color:white">
+          <h4 id="bov1h4"></h4>
+          <h5 id="bov1h5"></h5>
+          <h5 id="bov1h5"></h5>
+      </div>
+      <div class="col-sm" id="bov2" style="text-align: center; background-color:white; color:green">
+        <h4 id="bov2h4"></h4>
+        <h5 id="bov2h5"></h5>
+        <h5 id="bov2h5"></h5>
+      </div>
+      <div class="col-sm" id="bov3" style="text-align: center; background-color:white; color:blue">
+        <h4 id="bov3h4"></h4>
+        <h5 id="bov3h5"></h5>
+        <h5 id="bov3h5"></h5>
       </div>
     </div>
+  </div>
 
-    <div class="container-fluid" id="book">
-    <div class="row" id="bookIn">
-      <button type="button"   class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal" style="width:100%">BOOK</button>
-        <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+  <div class="container-fluid" id="book">
+  <div class="row" id="bookIn">
+    <button type="button"   class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal" style="width:100%">BOOK</button>
+      <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
 
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-            </div>
-            <div class="modal-body">
-              <div class="encloseForm">
-                  <form enctype="multipart/form-data">
-                      <div class="form-row">
-                          <div class="form-group col-sm-4">
-                            <label for="Type">Select Destination</label>
-                              <select class="form-control restype" id="desTi" name="type" required >
-                                  <option value="BHR" selected>BHR</option>
-                                  <option value="SIF">SIF</option>
-                                  <option value="SC">SC</option>
-                              </select>
-                          </div>
-                      </div>
-                  </div>
-            </div>
-            <div class="modal-footer" >
-              <button type="button" id="confirmBook" class="btn btn-default" data-dismiss="modal">confirm</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
           </div>
+          <div class="modal-body">
+            <div class="encloseForm">
+                <form enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-sm-4">
+                          <label for="Type">Select Destination</label>
+                            <select class="form-control restype" id="destination" name="type" required >
+                                <option value="BHR" selected>BHR</option>
+                                <option value="BHR" >MHR</options>
+                                <option value="SIF">SIF</option>
+                                <option value="SIF">LBC</option>
+                                <option value="SIF" >SBS</options>
+                                <option value="SIF">SES</option>
+                                <option value="SIF">MAIN BUILDING</option>
+                                <option value="SC" >GHR</options>
+                                <option value="SC">SHR</option>
+                                <option value="SC">SC</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="modal-footer" >
+            <button type="button" id="confirmBook" class="btn btn-default" data-dismiss="modal">confirm</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
 
-        </div>
-        </div>
-    </div>
-    <div class="row" id="bookOut" style="display:none">
-      <div class="col-sm">
-      <button type="button" id="unBook" class="btn btn-primary btn-lg btn-block" style="display:block">UNBOOK</button>
-    </div>
+      </div>
+      </div>
+  </div>
+  <div class="row" id="bookOut" style="display:none">
     <div class="col-sm">
-      <button type="button" id="gotIn" class="btn btn-primary btn-lg btn-block" style="display:block">GOTIN</button>
-    </div>
-    </div>
-    </div>
+    <button type="button" id="unBook" class="btn btn-primary btn-lg btn-block" style="display:block">UNBOOK</button>
+  </div>
+  <div class="col-sm">
+    <button type="button" id="gotIn" class="btn btn-primary btn-lg btn-block" style="display:block">GOTIN</button>
+  </div>
+  </div>
+  </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
