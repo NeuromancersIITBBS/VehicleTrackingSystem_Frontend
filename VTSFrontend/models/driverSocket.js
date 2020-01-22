@@ -1,6 +1,10 @@
 // Make Connection
 let socket = io.connect('http://localhost:4000');
 let driverID = 0;
+let colorCode;
+let occupiedSeats;
+let allUsers=[];
+let myUsers=[];
 
 window.onload = function(){
 
@@ -19,7 +23,7 @@ function emitLocation(location){
     socket.emit('location', {
         id: driverID,
         location: {
-            lat: location.coords.latitude, 
+            lat: location.coords.latitude,
             lng: location.coords.longitude
         },
         timestamp: Date.now()
