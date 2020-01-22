@@ -1,36 +1,4 @@
-let map;
-let markers = [];
-let coords;
 let uniqueId;
-
-// Make Connection
-let socket = io.connect('http://localhost:4000');
-
-$(document).ready(async function () {
-	$("#confirmBook").click(function () {
-		$("#bookIn").hide();
-		$("#bookOut").show();
-		// // Get GPS location of User
-		// navigator.geolocation.getCurrentPosition(success,failure);
-		// function success(position){
-		//   coords =new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-		// console.log(coords);}
-		// function failure(){}
-		userInfo(coords);
-	});
-	$("#unBook").click(function () {
-		$("#bookOut").hide();
-		$("#bookIn").show();
-		unBook(uniqueId);
-	});
-	$("#gotIn").click(function () {
-		$("#bookOut").hide();
-		$("#bookIn").show();
-	});
-	// await bovData();
-	markers = initMarkers(3);
-	socket.on('location', updateLocation);
-});
 
 function updateLocation(data) {
 	// Query DOM
@@ -45,32 +13,7 @@ function updateLocation(data) {
 	}
 }
 
-function initMap() {
-	const options = {
-		center: {
-			lat: 20.147993,
-			lng: 85.670953
-		},
-		zoom: 15
-	};
-	map = new google.maps.Map(document.getElementById('map'), options);
-};
 
-function initMarkers(numOfMarkers) {
-	let markers = [];
-	for (let i = 0; i < numOfMarkers; ++i) {
-		let marker = new google.maps.Marker({
-			position: {
-				lat: 20.147993,
-				lng: 85.670953
-			},
-			map: map,
-			icon: `http://maps.google.com/mapfiles/kml/paddle/${i + 1}.png`
-		});
-		markers.push(marker);
-	}
-	return markers;
-}
 //function to update the user's location and his destination (ajax POST)
 function userInfo(coords) {
 
