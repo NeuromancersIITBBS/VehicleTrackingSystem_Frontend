@@ -9,12 +9,15 @@ let currLocationBtn = document.getElementById('getLocation'),
     updateAllBtn.addEventListener('click', updateAll);
     currLocationBtn.addEventListener('click',this.getLocation);
     updateDriverInfoBtn.addEventListener('click', updateSeatsAndCode);
+    allUsersBtn.addEventListener('click',getUserInformation);
+    myUsersBtn.addEventListener('click',getUserInformation);
+
 };
-// Get GPS location 
+// Get GPS location
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(emitLocation);
-    } else { 
+    } else {
         alert('Geolocation is not supported by this browser.');
     }
 }
