@@ -1,11 +1,3 @@
-//Event Listeners
-
-window.onload = function(){
-
-manualLocationBtn.addEventListener('click', manualLocation);
-updateAllBtn.addEventListener('click', updateAll);
-updateDriverInfoBtn.addEventListener('click', updateSeatsAndCode);
-};
 
 // Updates locations filled manually in input fields (For testing only!)
 function manualLocation(){

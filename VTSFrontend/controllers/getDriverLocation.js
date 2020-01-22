@@ -5,7 +5,8 @@ let currLocationBtn = document.getElementById('getLocation'),
     lng = document.getElementById('lngVal'),
     manualLocationBtn = document.getElementById('manualLocation'),
     updateAllBtn = document.getElementById('updateAllBtn');
-
+    manualLocationBtn.addEventListener('click', manualLocation);
+    updateAllBtn.addEventListener('click', updateAll);
     currLocationBtn.addEventListener('click',this.getLocation);
     updateDriverInfoBtn.addEventListener('click', updateSeatsAndCode);
 };
