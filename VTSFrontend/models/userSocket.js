@@ -22,6 +22,7 @@ $(document).ready(async function () {
 	$("#gotIn").click(function () {
 		$("#bookOut").hide();
 		$("#bookIn").show();
+		gotIn(uniqueId);
 	});
 	// await bovData();
 	markers = initMarkers(3);
