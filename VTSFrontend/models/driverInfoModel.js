@@ -12,7 +12,23 @@ function updateDriverInfo(driverID,occupiedseats,colorcode){   //colorcode needs
           alert("Something went wrong, please try again.");
         },
         success: function(res) {
-          console.log("Success!");   
+          console.log("Success!");
+        }
+  });
+}
+
+//function to get USER data
+function getUserInfo(){
+    let endpoint=`http:\\vts_backend`;
+    $.ajax({
+        url: endpoint,
+        method: 'GET',
+        data:'json',
+        error: function (err) {
+    			alert("Something went wrong, please try again.");
+    		},
+    		success: function (res) {
+          return res;
         }
   });
 }
