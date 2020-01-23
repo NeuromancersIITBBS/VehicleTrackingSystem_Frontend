@@ -31,15 +31,15 @@ function updateLocation(data) {
 
 
 //BOOK function to update the user's location and his destination (ajax POST)
-let book = function(pickupObject) {
+let book = function (pickupObject) {
 	let endpoint = `http:\\vts_backend`;
 	let jsObj = {
 		location: pickupObject,
-		destination:$("#destination").val(),
+		destination: $("#destination").val(),
 		timeStamp: new Date().getTime()
 	};
 	let jsonObj = JSON.stringify(jsObj);
-	
+
 	// Note: Move this to model
 	$.ajax({
 		url: endpoint,
@@ -75,20 +75,21 @@ function unBook(uniqueId) {
 }
 ///////////// ajax call for GOTIN
 // Move to Model
-function gotIn(uniqueId){
-  let endpoint=`http:\\vts_backend`;
-  let jsObj = {Id:uniqueId,
-              };
+function gotIn(uniqueId) {
+	let endpoint = `http:\\vts_backend`;
+	let jsObj = {
+		Id: uniqueId,
+	};
 
-  let jsonObj = JSON.stringify(jsObj);
-  $.ajax({
-    url : endpoint,
-    method : 'POST',
-    data : jsonObj,
-    contentType : 'application/json',
-    }).done(function(response){
-                console.log('Success');
-    }).fail(function(){
-                alert('fail!');
-    })
+	let jsonObj = JSON.stringify(jsObj);
+	$.ajax({
+		url: endpoint,
+		method: 'POST',
+		data: jsonObj,
+		contentType: 'application/json',
+	}).done(function (response) {
+		console.log('Success');
+	}).fail(function () {
+		alert('fail!');
+	})
 }

@@ -1,10 +1,12 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
 
     <!-- jQuery -->
-    <script  src="https://code.jquery.com/jquery-3.4.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="./driver.js"></script>
 
     <!--Models-->
@@ -15,12 +17,12 @@
     <script src="./controllers/driverInfoController.js"></script>
     <script src="./controllers/getDriverLocation.js"></script>
     
-    
     <title>Vehicle Tracking System</title>
 </head>
+
 <body>
     <div id="currLocation">
-        <p><strong>Lat: </strong> <span id="latVal"></span></p> 
+        <p><strong>Lat: </strong> <span id="latVal"></span></p>
         <p><strong>Lng: </strong> <span id="lngVal"></span></p>
     </div>
     <button id="getLocation">Update Location</button>
@@ -43,8 +45,9 @@
         <button id="updateDriverInfoBtn">Update the information</button>
     </div>
     <div id="informationUsers">
-      <button id="allUsersBtn">Get all users</button>
-      <button id="myUsersBtn">Get My users</button>
+        <button id="allUsersBtn">Get all users</button>
+        <button id="myUsersBtn">Get My users</button>
     </div>
 </body>
+
 </html>

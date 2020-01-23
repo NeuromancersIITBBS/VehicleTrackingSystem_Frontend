@@ -1,139 +1,151 @@
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
-    <script src="./user.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+	<script src="./user.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <!--Models-->
-    <script src="./models/userSocket.js"></script>
-    <script src="./models/userModel.js"></script>
-    <!--Controllers-->
-    <script src="./controllers/userMap.js"></script>
-    <script src="./controllers/userController.js"></script>
+	<!--Models-->
+	<script src="./models/userSocket.js"></script>
+	<script src="./models/userModel.js"></script>
+	<!--Controllers-->
+	<script src="./controllers/userMap.js"></script>
+	<script src="./controllers/userController.js"></script>
 
-    <title>Vehicle Tracking System</title>
-    <style type="text/css">
-        /* Always set the map height explicitly to define the size of the div
+	<title>Vehicle Tracking System</title>
+	<style type="text/css">
+		/* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
-        #map {
-            height: 400px;  /* The height is 400 pixels */
-            width: 100%;  /* The width is the width of the web page */
-        }
-        #navBar{
-          width:100%;
-          height:50px;
-        }
-        #bovDetails{
-          width:100%;
-          height:150px;
-          background-color: white;
-        }
-        /* Optional: Makes the sample page fill the window. */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+		#map {
+			height: 400px;
+			/* The height is 400 pixels */
+			width: 100%;
+			/* The width is the width of the web page */
+		}
+
+		#navBar {
+			width: 100%;
+			height: 50px;
+		}
+
+		#bovDetails {
+			width: 100%;
+			height: 150px;
+			background-color: white;
+		}
+
+		/* Optional: Makes the sample page fill the window. */
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
 
 
 </head>
+
 <body>
-  <div class="container-fluid" id="navBar">
-  </div>
-  <div class="container">
-      <div id="map"></div>
-  </div>
-  <div class="container-fluid" id="bovDetails">
-    <div class="row">
-      <div class="col-sm" id="bov1" style="text-align:center; background-color:white">
-          <h4 id="bov1h4"></h4>
-          <h5 id="bov1h5"></h5>
-          <h5 id="bov1h5"></h5>
-      </div>
-      <div class="col-sm" id="bov2" style="text-align: center; background-color:white; color:green">
-        <h4 id="bov2h4"></h4>
-        <h5 id="bov2h5"></h5>
-        <h5 id="bov2h5"></h5>
-      </div>
-      <div class="col-sm" id="bov3" style="text-align: center; background-color:white; color:blue">
-        <h4 id="bov3h4"></h4>
-        <h5 id="bov3h5"></h5>
-        <h5 id="bov3h5"></h5>
-      </div>
-    </div>
-  </div>
+	<div class="container-fluid" id="navBar">
+	</div>
+	<div class="container">
+		<div id="map"></div>
+	</div>
+	<div class="container-fluid" id="bovDetails">
+		<div class="row">
+			<div class="col-sm" id="bov1" style="text-align:center; background-color:white">
+				<h4 id="bov1h4"></h4>
+				<h5 id="bov1h5"></h5>
+				<h5 id="bov1h5"></h5>
+			</div>
+			<div class="col-sm" id="bov2" style="text-align: center; background-color:white; color:green">
+				<h4 id="bov2h4"></h4>
+				<h5 id="bov2h5"></h5>
+				<h5 id="bov2h5"></h5>
+			</div>
+			<div class="col-sm" id="bov3" style="text-align: center; background-color:white; color:blue">
+				<h4 id="bov3h4"></h4>
+				<h5 id="bov3h5"></h5>
+				<h5 id="bov3h5"></h5>
+			</div>
+		</div>
+	</div>
 
-  <div class="container-fluid" id="book">
-  <div class="row" id="bookIn">
-    <button type="button"   class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal" style="width:100%">BOOK</button>
-      <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
+	<div class="container-fluid" id="book">
+		<div class="row" id="bookIn">
+			<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal"
+				style="width:100%">BOOK</button>
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          </div>
-          <div class="modal-body">
-            <div class="encloseForm">
-                <form enctype="multipart/form-data">
-                    <div class="form-row">
-                        <div class="form-group col-sm-4">
-                          <label for="Type">Select Destination</label>
-                            <select class="form-control restype" id="destination" name="type" required >
-                                <option value="BHR" selected>BHR</option>
-                                <option value="BHR" >MHR</options>
-                                <option value="SIF">SIF</option>
-                                <option value="SIF">LBC</option>
-                                <option value="SIF" >SBS</options>
-                                <option value="SIF">SES</option>
-                                <option value="SIF">MAIN BUILDING</option>
-                                <option value="SC" >GHR</options>
-                                <option value="SC">SHR</option>
-                                <option value="SC">SC</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-          </div>
-          <div class="modal-footer" >
-            <button type="button" id="confirmBook" class="btn btn-default" data-dismiss="modal">confirm</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
+						</div>
+						<div class="modal-body">
+							<div class="encloseForm">
+								<form enctype="multipart/form-data">
+									<div class="form-row">
+										<div class="form-group col-sm-4">
+											<label for="Type">Select Destination</label>
+											<select class="form-control restype" id="destination" name="type" required>
+												<option value="BHR" selected>BHR</option>
+												<option value="BHR">MHR</options>
+												<option value="SIF">SIF</option>
+												<option value="SIF">LBC</option>
+												<option value="SIF">SBS</options>
+												<option value="SIF">SES</option>
+												<option value="SIF">MAIN BUILDING</option>
+												<option value="SC">GHR</options>
+												<option value="SC">SHR</option>
+												<option value="SC">SC</option>
+											</select>
+										</div>
+									</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="confirmBook" class="btn btn-default" data-dismiss="modal">confirm</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
 
-      </div>
-      </div>
-  </div>
-  <div class="row" id="bookOut" style="display:none">
-    <div class="col-sm">
-    <button type="button" id="unBook" class="btn btn-primary btn-lg btn-block" style="display:block">UNBOOK</button>
-  </div>
-  <div class="col-sm">
-    <button type="button" id="gotIn" class="btn btn-primary btn-lg btn-block" style="display:block">GOTIN</button>
-  </div>
-  </div>
-  </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+				</div>
+			</div>
+		</div>
+		<div class="row" id="bookOut" style="display:none">
+			<div class="col-sm">
+				<button type="button" id="unBook" class="btn btn-primary btn-lg btn-block" style="display:block">UNBOOK</button>
+			</div>
+			<div class="col-sm">
+				<button type="button" id="gotIn" class="btn btn-primary btn-lg btn-block" style="display:block">GOTIN</button>
+			</div>
+		</div>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
 
 
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJKV1bs7RogqpcMvvSuSLTDPB19lPR5dI&callback=initMap"
-        async defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJKV1bs7RogqpcMvvSuSLTDPB19lPR5dI&callback=initMap"
+		async defer></script>
 </body>
+
 </html>
