@@ -5,12 +5,13 @@ window.onload = function () {
 		lng = document.getElementById('lngVal'),
 		manualLocationBtn = document.getElementById('manualLocation'),
 		updateAllBtn = document.getElementById('updateAllBtn');
-	manualLocationBtn.addEventListener('click', manualLocation);
-	updateAllBtn.addEventListener('click', updateAll);
-	currLocationBtn.addEventListener('click', this.getLocation);
-	updateDriverInfoBtn.addEventListener('click', updateSeatsAndCode);
-	allUsersBtn.addEventListener('click', getUserInformation);
-	myUsersBtn.addEventListener('click', getUserInformation);
+	//check for an error in the below line.
+	manualLocationBtn.addEventListener('click',manualLocation);
+	updateAllBtn.addEventListener('click',updateAll);
+	currLocationBtn.addEventListener('click',this.getLocation);
+	updateDriverInfoBtn.addEventListener('click',updateSeatsAndCode);
+	allUsersBtn.addEventListener('click',getUserInformation);
+	myUsersBtn.addEventListener('click',getUserInformation);
 
 };
 // Get GPS location

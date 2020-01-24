@@ -11,12 +11,23 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-	<!--Models-->
-	<script src="./models/userSocket.js"></script>
-	<script src="./models/userModel.js"></script>
+	
+	<!--Views-->
+	<script src="./views/driverInfoView.js"></script>
+	<script src="./views/driverTesting.js"></script>
+	<script src="./views/getDriverLocation.js"></script>
+	<script src="./views/userLocation.js"></script>
+	<script src="./views/userMap.js"></script>
+	<script src="./views/userSocket.js"></script>
+
+
 	<!--Controllers-->
-	<script src="./controllers/userMap.js"></script>
+	<script src="./controllers/driverInfoController.js"></script>
 	<script src="./controllers/userController.js"></script>
+
+	<!--Models-->
+	<script src="./models/userModel.js"></script>
+	<script src="./models/driverInfoModel.js"></script>
 
 	<title>Vehicle Tracking System</title>
 	<style type="text/css">
@@ -95,6 +106,22 @@
 							<div class="encloseForm">
 								<form enctype="multipart/form-data">
 									<div class="form-row">
+										<div class="form-group col-sm-6">
+											<label for="Type">Select Pickup Location</label>
+											<select class="form-control restype" id="userLocation" name="type" required >
+												<option value="BHR" >BHR</option>
+												<option value="YourLocation" selected>My Location</options>
+												<option value="BHR" >MHR</options>
+												<option value="SIF">SIF</option>
+												<option value="SIF">LBC</option>
+												<option value="SIF" >SBS</options>
+												<option value="SIF">SES</option>
+												<option value="SIF">MAIN BUILDING</option>
+												<option value="SC" >GHR</options>
+												<option value="SC">SHR</option>
+												<option value="SC">SC</option>
+											</select>
+										</div>
 										<div class="form-group col-sm-4">
 											<label for="Type">Select Destination</label>
 											<select class="form-control restype" id="destination" name="type" required>
@@ -111,6 +138,7 @@
 											</select>
 										</div>
 									</div>
+								</form>
 							</div>
 						</div>
 						<div class="modal-footer">
