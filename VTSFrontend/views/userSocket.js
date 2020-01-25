@@ -1,22 +1,25 @@
 // Make Connection
 let socket = io.connect('http://localhost:4000');
-//let coords;
+
+let uniqueId;
 
 $(document).ready(async function () {
-	$('#confirmBook').click(function () {
+	$('#confirmBook').click(async function () {
+		let pickupObj = {};
 		$('#bookIn').hide();
 		$('#bookOut').show();
 		// Get GPS location of User
 		if($('#userLocation').val()==='YourLocation'){
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition((position) => {
+			if(navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(async (position) => {
 					pickupObj = {
-						pickupPoint: 'Custom', 
+						pickupPoint: 'custom', 
 						loaction: {
 							lat: position.coords.latitude,
 							lng: position.coords.longitude
 						}
 					};
+					uniqueId = await bookController(pickupObj);
 				});
 			  } else {
 				alert('Geolocation is not supported by this browser.');
@@ -26,14 +29,14 @@ $(document).ready(async function () {
 			pickupObj = {
 				pickupPoint: $('#userLocation').val(),
 			};
+			uniqueId = await bookController(pickupObj);
 		}
-		let userId = bookController(pickupObj);
 	});
 
 	$('#unBook').click(function () {
 		$('#bookOut').hide();
 		$('#bookIn').show();
-		unBookController(uniqueId);
+		unbookController(uniqueId);
 	});
 	$('#gotIn').click(function () {
 		$('#bookOut').hide();

@@ -1,5 +1,5 @@
 //BOOK function to update the user's location and his destination (ajax POST)
-function book (pickupObject) {
+async function book (pickupObject) {
 	let endpoint = `http://localhost:4000/book`;
 	let jsObj = {
 		location: pickupObject,
@@ -7,7 +7,8 @@ function book (pickupObject) {
 		timeStamp: new Date().getTime()
 	};
 	let jsonObj = JSON.stringify(jsObj);
-	$.ajax({
+	console.log(jsonObj);
+	let response = $.ajax({
 		url: endpoint,
 		method: 'POST',
 		data: jsonObj,
@@ -15,43 +16,39 @@ function book (pickupObject) {
 	}).done(function (response) {
 		console.log('Success');
 		console.log(response);
+		// createCookie('uniqueId', response, 100);
 		return response;
 	}).fail(function () {
 		alert('fail!');
 	}).always(function () {
 	});
+	return response;
 }
 /////// ajax call for UNBOOKING
-function unBook(uniqueId) {
+function unbook(uniqueId) {
 	let endpoint = `http://localhost:4000/unbook/${uniqueId}`;
 	$.ajax({
 		url: endpoint,
 		method: 'GET',
-		dataType: 'json',
-		error: function (err) {
-			alert("Something went wrong, please try again.");
-		},
-		success: function (res) {
-			console.log("Success!");
-			console.log(res);
-		}
+		contentType: 'application/json'
+	}).done(function (res) {
+		console.log("Success!");
+	}).fail(function (err) {
+		alert("Something went wrong, please try again.");
+	}).always(function () {
 	});
 }
 ///////////// ajax call for GOTIN
 function gotIn(uniqueId) {
-	let endpoint = `http://localhost:4000/gotin/${uniqueId}`;
-	let jsObj = {
-		id: uniqueId,
-	};
-	let jsonObj = JSON.stringify(jsObj);
+	let endpoint = `http://localhost:4000/gotin/${uniqueId}`;	
 	$.ajax({
 		url: endpoint,
-		method: 'POST',
-		data: jsonObj,
+		method: 'GET',
 		contentType: 'application/json',
 	}).done(function (response) {
 		console.log('Success');
 	}).fail(function () {
 		alert('fail!');
-	})
+	}).always(function () {
+	});
 }

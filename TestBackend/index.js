@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('../VTSFrontend'));
 
@@ -43,16 +43,16 @@ app.get('/unbook/:id', (req, res) => {
 	const userId = req.params.id;
 	console.log('Unbook Request from ' + userId);
 	// Find the userId in the array and delete that user
-	const index = users.findIndex(element => element.id ==userId);
-	users.splice(index, 1)
-	res.end();
+	const index = users.findIndex(element => element.id == userId);
+	users.splice(index, 1);
+	res.status(200).send("Success");
 });
 
-app.post('/gotin/:id', (req, res) => {
+app.get('/gotin/:id', (req, res) => {
 	const userId = req.params.id;
-	console.log('Gotin Request from ' + userId);
+	console.log('Unbook Request from ' + userId);
 	// Find the userId in the array and delete that user
-	const index = users.findIndex(element => element.id ==userId);
-	users.splice(index, 1)
-	res.end();
+	const index = users.findIndex(element => element.id == userId);
+	users.splice(index, 1);
+	res.status(200).send("Success");
 });

@@ -1,9 +1,7 @@
-let uniqueNumber;
-
 //controller function that calls book model function.
-function bookController(pickUpLocation){
-    let responseController = book(pickUpLocation);    
-    return responseController;
+async function bookController(pickUpLocation){
+    let uniqueId = await book(pickUpLocation);    
+    return uniqueId;
 }
 
 //controller function that calls unbook model function.

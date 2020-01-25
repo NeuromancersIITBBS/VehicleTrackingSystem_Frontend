@@ -1,5 +1,4 @@
 let coords;
-let uniqueId;
 
 function updateLocation(data) {
 	console.log(data);

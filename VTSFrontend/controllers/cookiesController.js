@@ -1,18 +1,25 @@
 // expiresMin, path and domain are optional arguments
-function createCookie(name, value, expiresMin, path, domain) {
-	let cookie = name + "=" + escape(value) + ";";
+function createCookie(name, value, expires, path, domain) {
+	var cookie = name + "=" + escape(value) + ";";
 
 	if (expires) {
-		expiresMin = new Date(new Date().getTime() + parseInt(expiresMin) * 1000 * 60);
-		cookie += "expires=" + expiresMin.toGMTString() + ";";
+		// If it's a date
+		if (expires instanceof Date) {
+			// If it isn't a valid date
+			if (isNaN(expires.getTime()))
+				expires = new Date();
+		}
+		else
+			expires = new Date(new Date().getTime() + parseInt(expires) * 1000 * 60 );
+
+		cookie += "expires=" + expires.toGMTString() + ";";
 	}
 
-	if (path) {
+	if (path)
 		cookie += "path=" + path + ";";
-	}
-	if (domain) {
+	if (domain)
 		cookie += "domain=" + domain + ";";
-	}
+	console.log(cookie);
 	document.cookie = cookie;
 }
 
@@ -26,5 +33,5 @@ function getCookie(name) {
 function deleteCookie(name, path, domain) {
 	// If the cookie exists
 	if (getCookie(name))
-	  createCookie(name, "", -1, path, domain);
-  }
+		createCookie(name, "", -1, path, domain);
+}
