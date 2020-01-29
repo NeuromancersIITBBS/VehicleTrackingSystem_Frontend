@@ -19,40 +19,68 @@ io.on('connection', (socket) => {
 	console.log('made socket connection on socket: ' + socket.id);
 	socket.on('location', (data) => {
 		console.log(`Location updated to ${data.location.lat} and ${data.location.lng}`);
-		io.emit('location', data);
+		io.emit('driverInfo', data);
+	});
+
+
+
+
+
+
+	// BOOK Request: /book (POST)
+	// app.post('/book', (req, res) => {
+	// 	let user = req.body;
+	// 	console.log('Book Request');
+	// 	console.log(user);
+	// 	user.id = uniqueID++;
+	// 	users.push(user);
+	// 	// Create a session using cookie-parser/sessions
+	// 	res.send(user.id.toString());
+	// });
+	socket.on('book',(data)=>{
+		console.log(data);
+		console.log('Book Request');
+		let user=data;
+		user.id = uniqueID++;
+		users.push(data);
+		console.log(user.id);
+		io.emit('bookResponse',user.id)
+		io.emit('getUserInfo',users);
+	});
+
+	// UNBOOK Request: /unbook/:id GET
+	// app.get('/unbook/:id', (req, res) => {
+	// 	const userId = req.params.id;
+	// 	console.log('Unbook Request from ' + userId);
+	// 	// Find the userId in the array and delete that user
+	// 	const index = users.findIndex(element => element.id == userId);
+	// 	users.splice(index, 1);
+	// 	res.status(200).send("Success");
+	// });
+	socket.on('unBook',(uniqueId)=>{
+		console.log('Unbook Request from ' + uniqueId);
+		const index = users.findIndex(element => element.id == uniqueId);
+			users.splice(index, 1);
+		io.emit('getUserInfo',users);
+	});
+	//gotin request
+	// app.get('/gotin/:id', (req, res) => {
+	// 	const userId = req.params.id;
+	// 	console.log('Unbook Request from ' + userId);
+	// 	// Find the userId in the array and delete that user
+	// 	const index = users.findIndex(element => element.id == userId);
+	// 	users.splice(index, 1);
+	// 	res.status(200).send("Success");
+	// });
+	socket.on('gotIn',(uniqueId)=>{
+		console.log('Unbook Request from ' + uniqueId);
+		// Find the userId in the array and delete that user
+		const index = users.findIndex(element => element.id == uniqueId);
+		users.splice(index, 1);
+		io.emit('getUserInfo',users);
 	});
 
 	// socket.on('location', (data) => {
 	//     socket.broadcast.emit('typing', data);
 	// });
-});
-
-// BOOK Request: /book (POST)
-app.post('/book', (req, res) => {
-	let user = req.body;
-	console.log('Book Request');
-	console.log(user);
-	user.id = uniqueID++;
-	users.push(user);
-	// Create a session using cookie-parser/sessions
-	res.send(user.id.toString());
-});
-
-// UNBOOK Request: /unbook/:id GET
-app.get('/unbook/:id', (req, res) => {
-	const userId = req.params.id;
-	console.log('Unbook Request from ' + userId);
-	// Find the userId in the array and delete that user
-	const index = users.findIndex(element => element.id == userId);
-	users.splice(index, 1);
-	res.status(200).send("Success");
-});
-
-app.get('/gotin/:id', (req, res) => {
-	const userId = req.params.id;
-	console.log('Unbook Request from ' + userId);
-	// Find the userId in the array and delete that user
-	const index = users.findIndex(element => element.id == userId);
-	users.splice(index, 1);
-	res.status(200).send("Success");
 });
