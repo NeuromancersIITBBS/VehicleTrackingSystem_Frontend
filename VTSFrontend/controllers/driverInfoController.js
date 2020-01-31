@@ -6,7 +6,7 @@ function updateDriverInfoController(driverId,occupiedSeats,colorCode){
 
 
 //Function that calls getUserInfo model function.
-function getUserInfoControler(){
-    let responseController = getUserInfo();
-    return responseController;
-}
+// function getUserInfoControler(){
+//     let responseController = getUserInfo();
+//     return responseController;
+// }
