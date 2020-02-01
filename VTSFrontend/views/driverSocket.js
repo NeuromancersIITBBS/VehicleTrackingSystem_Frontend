@@ -10,13 +10,13 @@ window.onload = function () {
 
 
 	// Listen for location value
-	socket.on('location', (data) => {
-		console.log(data);
-		lat.innerHTML = data.location.lat;
-		lng.innerHTML = data.location.lng;
-	});
-
-};
+// 	socket.on('location', (data) => {
+// 		console.log(data);
+// 		lat.innerHTML = data.location.lat;
+// 		lng.innerHTML = data.location.lng;
+// 	});
+//
+// };
 
 // Call back function for getLocation
 function emitLocation(location) {
@@ -29,4 +29,6 @@ function emitLocation(location) {
 		timestamp: Date.now()
 	});
 	console.log(location);
-}
+};
+
+};

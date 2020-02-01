@@ -5,13 +5,12 @@ function updateSeatsAndCode() {
 	let seats = document.getElementById('occupiedSeats').value;
 	let code = document.getElementById('setDestination').value;
 	console.log(seats);
-	updateDriverInfoController(driverID, seats, code); //calling model function
+	updateDriverInfoController(driverID, seats, code); //calling controller function
 };
 
 function getUserInformation() {
-	let res = getUserInfoController(); //calling model function
-	res.forEach((item) => {
-		allUsers.push(item);
+	// let res = getUserInfoController();
+	allUsers.forEach((item) => {
 		let latlng = new google.maps.LatLng(item.coords.lat, item.coords.lng);
 		setMarker(mapAll, latlng, item.colorCode);// map which has all users
 		if (item.colorCode == colorCode) {

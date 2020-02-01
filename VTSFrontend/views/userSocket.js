@@ -5,15 +5,17 @@ let uniqueId;
 
 $(document).ready(async function () {
 	$('#confirmBook').click(async function () {
+		//if else statement should be added for checking if destination and pickup points are same-
 		let pickupObj = {};
 		$('#bookIn').hide();
 		$('#bookOut').show();
 		// Get GPS location of User
+
 		if($('#userLocation').val()==='YourLocation'){
 			if(navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(async (position) => {
 					pickupObj = {
-						pickupPoint: 'custom', 
+						pickupPoint: 'custom',
 						loaction: {
 							lat: position.coords.latitude,
 							lng: position.coords.longitude
@@ -28,6 +30,7 @@ $(document).ready(async function () {
 		else{
 			pickupObj = {
 				pickupPoint: $('#userLocation').val(),
+				// needs to be updated
 			};
 			uniqueId = await bookController(pickupObj);
 		}
@@ -45,5 +48,5 @@ $(document).ready(async function () {
 	});
 	// await bovData();
 	markers = initMarkers(3);
-	socket.on('location', updateLocation);
+	socket.on('driverInfo', updateLocation);
 });
