@@ -1,0 +1,56 @@
+	#currLocation {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 12px;
+            margin-left: 0px;
+            border: 0px;
+            position: sticky;
+            z-index: 1;
+        }
+	 #getLocation {
+           background-color: #563D7C!important;
+            height: 5.5vh;
+            margin-bottom: 10px;
+            margin-left: 15px;
+            margin-right: 15px;
+        } 
+	#manualLocation {
+        background-color: #563D7C!important;
+		height: 5.5vh;
+        margin-bottom: 0px;
+        margin-left: 15px;
+        margin-right: 15px;
+        } 	
+	#updateAllBtn {
+        background-color: #563D7C!important;
+		height: 5.5vh;
+        margin-bottom: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        } 		
+	#updateDriverInfoBtn{
+        background-color: #563D7C!important;
+		height: 5.5vh;
+        margin-bottom: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        } 		
+	#allUsersBtn {
+        background-color: #563D7C!important;
+		height: 5.5vh;
+        margin-bottom: 0px;
+        margin-left: 15px;
+        margin-right: 15px;
+        } 		
+    #allUsersBtn {
+        background-color: #563D7C!important;
+		height: 5.5vh;
+        margin-bottom: 0px;
+        margin-left: 15px;
+        margin-right: 15px;
+        } 				
+	* { box-sizing: border-box; }
+	.latlng { width: 30em; max-width: 100%; }
+	.latlng p { display: inline-block; max-width: 50%; }
+	.latlng p:nth-child(1) { float:left; }
+	.latlng p:nth-child(2) { float:right; }	
