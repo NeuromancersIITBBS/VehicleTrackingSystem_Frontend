@@ -15,6 +15,8 @@
     <script src="./views/getDriverLocation.js"></script>
     <script src="./views/userLocation.js"></script>
     <script src="./views/userMap.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
     <!--Models-->
     <script src="./models/driverInfoModel.js"></script>
@@ -27,36 +29,69 @@
 
     
     <title>Vehicle Tracking System</title>
+	
+	 <link rel="stylesheet" type="text/css" href="indexDriverstylesheet.css">
 </head>
 
 <body>
-    <div id="currLocation">
+    <div class="container">
+	<div class="latlng" id="currLocation">
         <p><strong>Lat: </strong> <span id="latVal"></span></p>
-        <p><strong>Lng: </strong> <span id="lngVal"></span></p>
+        <p margin-right=150px><strong>Lng: </strong> <span id="lngVal"></span></p>
     </div>
-    <button id="getLocation">Update Location</button>
+	
+     <button type="button" class="btn btn-primary btn-lg btn-block" id="getLocation">Update Location</button>
+	</div> 
+	<div class="container">
     <div id="manualLocationForm">
-        <label for="manualID">ID: </label>
-        <input type="number" id="manualID"><br>
-        <label for="manualLat">Lat: </label>
-        <input type="text" id="manualLat"><br>
-        <label for="manualLng">Lng: </label>
-        <input type="text" id="manualLng"><br>
-        <button id="manualLocation">Update Manually</button>
+    <form>
+		<div class="form-group row">
+			<label for="manualID" class="col-sm-2 col-form-label">Driver ID:</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="manualID" placeholder="Driver ID">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="manualLat" class="col-sm-2 col-form-label">Latitude:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="manualLat" placeholder="Latitude">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="manualLng" class="col-sm-2 col-form-label">Longitude:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="manualLng" placeholder="Longitude">
+			</div>
+		</div>
+	</form>
+		<button type="button" class="btn btn-primary btn-lg btn-block" id="manualLocation">Update Manually</button>
         <br><br>
-        <button id="updateAllBtn">Update All 3</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="updateAllBtn">Update All 3</button>
     </div>
     <div class="update">
-        <label for="occupiedSeats">No.of OccupiedSeats </label>
-        <input type="number" id="occupiedSeats"><br>
-        <label for="setDestination">Enter the final Destination:</label>
-        <input type="text" id="setDestination"><br>
-        <button id="updateDriverInfoBtn">Update the information</button>
+		
+	<form>
+		<div class="form-group">
+		<label for="occupiedSeats">Number of Occupied Seats:</label>
+		<input type="number" class="form-control" id="occupiedSeats" placeholder="no. of occupied seats">
+		</div>
+		<div class="form-group">
+		<label for="setDestination">Enter the final destination:</label>
+		<input type="text" class="form-control" id="setDestination" placeholder="final destination">
+		</div>
+	</form>
+	
+	<button type="button" class="btn btn-primary btn-lg btn-block" id="updateDriverInfoBtn">Update the information</button>
     </div>
     <div id="informationUsers">
-        <button id="allUsersBtn">Get all users</button>
-        <button id="myUsersBtn">Get My users</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block" id="allUsersBtn">
+			Get all users
+		</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block" id="allUsersBtn">
+			Get My users	
+		</button>	
     </div>
+	</div>
 </body>
 
 </html>
