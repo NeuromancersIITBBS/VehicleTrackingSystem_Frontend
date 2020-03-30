@@ -1,0 +1,46 @@
+
+       /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */ 
+        #map {
+            height: 68vh;
+            /* The height is 600 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+            /*margin: 0px;*/
+            margin-right: 0px;
+            overflow: hidden;
+        }
+        
+        #navBar {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 12px;
+            margin-left: 0px;
+            border: 0px;
+            position: sticky;
+            z-index: 1;
+        }
+        
+        #bovDetails {
+            width: 100%;
+            height: 100px;
+            background-color: white;
+            margin-top: 20px;
+            margin-bottom: 16px;
+        } 
+      
+        #BOOKbutton {
+           background-color: #563D7C!important;
+            height: 5.5vh;
+            margin-bottom: 50px;
+            margin-left: 15px;
+            margin-right: 15px;
+        } 
+        /* Optional: Makes the sample page fill the window. */
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
