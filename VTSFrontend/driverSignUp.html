@@ -1,0 +1,53 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="./models/signUp.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Vehicle Tracking System</title>
+</head>
+
+<body>
+    
+        <!-- Image and text -->
+        <nav class="navbar navbar-light bg-light ">
+            <a class="navbar-brand "  href="#">
+            Vehicle Tracking System
+            </a>
+        </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 my-2">
+                <form id="signup" >
+                    <div>
+                        <h4 class="h4">Sign Up</h4>
+                        <label for="Name" >Username : </label>
+                        <input  type="text" id ="driverName" style="margin-bottom:10px;padding:4px;padding-left:20px;" placeholder="Your name" required><br>
+                        <label for="phoneNo">Phone No : </label>
+                        <input type="text" id ="phoneNumber"style="margin-bottom:10px;padding:4px;padding-left:20px;"placeholder="Your phone number" required><br>
+                        <label for="password">Password : </label>
+                        <input type="password" id ="password"  style="margin-bottom:10px;padding:4px;padding-left:20px;" placeholder="Set password" required><br>
+                      </div>
+                    <button id="registerBtn" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+            <div class="col-md-6 my-2">
+                <h4 class="h4">Login</h4>
+                <form  onsubmit= "return validate()">
+                    <label for="Name">Username : </label>
+                    <input id="uname" placeholder="Username" type="text" style="margin-bottom:10px;padding:4px;padding-left:20px;" required/><br>
+                    <label for="password">Password : </label>
+                    <input id="pass" placeholder="password" type="password" style="margin-bottom:10px;padding:4px;padding-left:20px;" required/><br>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>  
+            </div>
+        </div>
+    </div>
+    
+   
+</body>
+
+</html>
