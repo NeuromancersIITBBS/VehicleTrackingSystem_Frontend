@@ -23,10 +23,10 @@ async function book (pickupObject) {
 	// 	alert('fail!');
 	// }).always(function () {
 	// });
-	let unId;
+	let unId=0;
 	socket.emit('book',{location: pickupObject,destination: $("#destination").val(),timeStamp: new Date().getTime()});
-	await socket.on('bookResponse',(response)=>{unId=response});
-	console.log(unId+1);
+	await socket.on('bookResponse',(response)=>{ if(unId==0){unId=response}});
+	console.log(unId);
 	return unId;
 }
 /////// ajax call for UNBOOKING

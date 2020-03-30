@@ -30,6 +30,7 @@ $(document).ready(async function () {
 		else{
 			pickupObj = {
 				pickupPoint: $('#userLocation').val(),
+				
 				// needs to be updated
 			};
 			uniqueId = await bookController(pickupObj);
