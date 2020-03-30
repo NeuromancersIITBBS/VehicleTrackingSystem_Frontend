@@ -1,66 +1,3 @@
-<<<<<<< HEAD
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
-    <!--View-->
-    <script src="./views/driverInfoView.js"></script>
-    <script src="./views/driverSocket.js"></script>
-    <script src="./views/driverTesting.js"></script>
-    <script src="./views/getDriverLocation.js"></script>
-    <script src="./views/userLocation.js"></script>
-    <script src="./views/userMap.js"></script>
-    
-    <!--Models-->
-    <script src="./models/driverInfoModel.js"></script>
-    <script src="./controllers/cookiesController.js"></script>
-
-
-    <!--Controllers-->
-    <script src="./controllers/driverInfoController.js"></script>
-
-
-    
-    <title>Vehicle Tracking System</title>
-</head>
-
-<body>
-    <div id="currLocation">
-        <p><strong>Lat: </strong> <span id="latVal"></span></p>
-        <p><strong>Lng: </strong> <span id="lngVal"></span></p>
-    </div>
-    <button id="getLocation">Update Location</button>
-    <div id="manualLocationForm">
-        <label for="manualID">ID: </label>
-        <input type="number" id="manualID"><br>
-        <label for="manualLat">Lat: </label>
-        <input type="text" id="manualLat"><br>
-        <label for="manualLng">Lng: </label>
-        <input type="text" id="manualLng"><br>
-        <button id="manualLocation">Update Manually</button>
-        <br><br>
-        <button id="updateAllBtn">Update All 3</button>
-    </div>
-    <div class="update">
-        <label for="occupiedSeats">No.of OccupiedSeats </label>
-        <input type="number" id="occupiedSeats"><br>
-        <label for="setDestination">Enter the final Destination:</label>
-        <input type="text" id="setDestination"><br>
-        <button id="updateDriverInfoBtn">Update the information</button>
-    </div>
-    <div id="informationUsers">
-        <button id="allUsersBtn">Get all users</button>
-        <button id="myUsersBtn">Get My users</button>
-    </div>
-</body>
-
-=======
 <html lang="en">
 
 <head>
@@ -157,5 +94,4 @@
 	</div>
 </body>
 
->>>>>>> upstream/master
 </html>
