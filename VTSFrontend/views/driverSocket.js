@@ -31,4 +31,4 @@ function emitLocation(location) {
 	console.log(location);
 };
 
-}; 
+};

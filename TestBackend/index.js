@@ -28,10 +28,10 @@ io.on('connection', (socket) => {
 
 
 	// BOOK Request: /book (POST)
-	//  app.post('/book', (req, res) => {
-	//  let user = req.body;
-	//  console.log('Book Request');
-	//  console.log(user);
+	// app.post('/book', (req, res) => {
+	// 	let user = req.body;
+	// 	console.log('Book Request');
+	// 	console.log(user);
 	// 	user.id = uniqueID++;
 	// 	users.push(user);
 	// 	// Create a session using cookie-parser/sessions
