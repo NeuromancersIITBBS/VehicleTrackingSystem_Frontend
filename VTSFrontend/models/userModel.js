@@ -1,7 +1,7 @@
 //BOOK function to update the user's location and his destination (ajax POST)
 
 async function book (pickupObject) {
-	// let endpoint = `http://localhost:4000/book`;
+	// let endpoint = `http://localhost:3000/book`;
 	// let jsObj = {
 	// 	location: pickupObject,
 	// 	destination: $("#destination").val(),
@@ -31,7 +31,7 @@ async function book (pickupObject) {
 }
 /////// ajax call for UNBOOKING
 function unbook(uniqueId) {
-	// let endpoint = `http://localhost:4000/unbook/${uniqueId}`;
+	// let endpoint = `http://localhost:3000/unbook/${uniqueId}`;
 	// $.ajax({
 	// 	url: endpoint,
 	// 	method: 'GET',
@@ -46,7 +46,7 @@ function unbook(uniqueId) {
 }
 ///////////// ajax call for GOTIN
 function gotIn(uniqueId) {
-	// let endpoint = `http://localhost:4000/gotin/${uniqueId}`;
+	// let endpoint = `http://localhost:3000/gotin/${uniqueId}`;
 	// $.ajax({
 	// 	url: endpoint,
 	// 	method: 'GET',

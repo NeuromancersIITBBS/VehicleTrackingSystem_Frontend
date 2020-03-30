@@ -1,5 +1,5 @@
 // Make Connection
-let socket = io.connect('http://localhost:4000');
+let socket = io.connect('http://localhost:3000');
 let driverID = 0;
 let colorCode;
 let occupiedSeats;

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <!--Views-->
+    <script src="./views/driverInfoView.js"></script>
+    <script src="./views/driverTesting.js"></script>
+    <script src="./views/userLocation.js"></script>
+    <script src="./views/userMap.js"></script>
+    <script src="./views/userSocket.js"></script>
+    <script src="./views/adminVeiw.js"></script>
+
+    <!--Controllers-->
+    <script src="./controllers/driverInfoController.js"></script>
+    <script src="./controllers/userController.js"></script>
+    <script src="./controllers/cookiesController.js"></script>
+    <script src="./controllers/adminController.js"></script>
+    
+    <!--Models-->
+    <script src="./models/userModel.js"></script>
+    <script src="./models/driverInfoModel.js"></script>
+    <script src="./models/adminModel.js"></script>
+
+    <title>Vehicle Tracking System</title>
+    <style type="text/css">
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+
+        #map {
+            height: 68vh;
+            /* The height is 600 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+            /*margin: 0px;*/
+            margin-right: 0px;
+            overflow: hidden;
+        }
+
+        #navBar {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 12px;
+            margin-left: 0px;
+            border: 0px;
+            position: sticky;
+            z-index: 1;
+        }
+
+        #bovDetails {
+            width: 100%;
+            height: 100px;
+            background-color: white;
+            margin-top: 20px;
+            margin-bottom: 16px;
+        }
+
+        #BOOKbutton {
+           background-color: #563D7C!important;
+            height: 5.5vh;
+            margin-bottom: 50px;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <div class="container-fluid" id="navBar">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="background-color: #563D7C!important;">
+            <a class="navbar-brand" href="#">VTS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#legendModal">Legend</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./public/Tariff Card for BOV.pdf" target="_blank">Fares</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./contactUs.html">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="modal" id="legendModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Legend for Map</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Modal body..
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div id="map"></div>
+    </div>
+    <div class="container-fluid" id="bovDetails">
+        <div class="row">
+            <div class="col-sm" id="bov1" style=" background-color:white">
+                <h4 id="bov1h4">Going to LBC</h4>
+                <h5 id="bov1h5">Vacancies:5</h5>
+                <h5 id="bov1h5">Status :LBC</h5>
+            </div>
+            <div class="col-sm" id="bov2" style="background-color:white; color:green">
+                <h4 id="bov2h4"></h4>
+                <h5 id="bov2h5"></h5>
+                <h5 id="bov2h5"></h5>
+            </div>
+            <div class="col-sm" id="bov3" style="background-color:white; color:blue">
+                <h4 id="bov3h4"></h4>
+                <h5 id="bov3h5"></h5>
+                <h5 id="bov3h5"></h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" >
+            <div class="col-sm">
+                <button type="button" id="AllDriversBtn" class="btn btn-primary btn-sm btn-block" style="display:block; background-color: #563D7C!important;">DRIVERS LIST</button>
+
+                <div id ="allDriversData"></div>
+            </div>
+            <div class="col-sm">
+                <button type="button" id="ReqDriversBtn" class="btn btn-primary btn-sm btn-block" style="display:block; background-color: #563D7C!important;">REQUESTED DRIVERS LIST</button>
+
+                <div id ="reqDriversData"></div>
+            </div>
+        </div>
+    </div>
+
+
+      <!--flagged Files
+        css : views/template/adminTemplate.css
+        javascript : views/template/adminTemplate.js-->
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJKV1bs7RogqpcMvvSuSLTDPB19lPR5dI&callback=initMap" async defer></script>
+</body>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJKV1bs7RogqpcMvvSuSLTDPB19lPR5dI&callback=initMap" async defer></script>
+
+
+</html>
