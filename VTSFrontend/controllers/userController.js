@@ -11,5 +11,5 @@ function unbookController(uniqueNumber){
 
 //controller function that calls gotIn model function.
 function gotInController(uniqueNumber){
-    unbook(uniqueNumber);
+    gotIn(uniqueNumber);
 }

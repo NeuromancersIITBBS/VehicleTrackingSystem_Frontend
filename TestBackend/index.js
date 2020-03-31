@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('../VTSFrontend'));
 
-let server = app.listen(4000, () => { console.log('Now listening to port 4000!') });
+let server = app.listen(3000, () => { console.log('Now listening to port 4000!') });
 
 let io = socket(server);
 // To be obtained by database

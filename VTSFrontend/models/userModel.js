@@ -1,6 +1,6 @@
 //BOOK function to update the user's location and his destination (ajax POST)
 
-async function book (pickupObject) {
+function book (pickupObject) {
 	// let endpoint = `http://localhost:3000/book`;
 	// let jsObj = {
 	// 	location: pickupObject,
@@ -23,11 +23,20 @@ async function book (pickupObject) {
 	// 	alert('fail!');
 	// }).always(function () {
 	// });
-	let unId=0;
-	socket.emit('book',{location: pickupObject,destination: $("#destination").val(),timeStamp: new Date().getTime()});
-	await socket.on('bookResponse',(response)=>{ if(unId==0){unId=response}});
-	console.log(unId);
-	return unId;
+	const userData = {
+		id: socket.id,
+		location: pickupObject,
+		destination: $("#destination").val(),
+		timeStamp: new Date().getTime()
+	};
+	socket.emit('book', userData);
+	socket.on('bookResponse',(response)=>{ 
+		if(response.id == socket.id){
+			// Store the user data in localStorage
+			localStorage.setItem('userData', JSON.stringify(userData));	
+		}
+	});
+	return socket.id;
 }
 /////// ajax call for UNBOOKING
 function unbook(uniqueId) {
@@ -42,8 +51,16 @@ function unbook(uniqueId) {
 	// 	alert("Something went wrong, please try again.");
 	// }).always(function () {
 	// });
-	socket.emit('unBook',uniqueId);
+	const {id} = JSON.parse(localStorage.getItem('userData'));
+	socket.emit('unbook',id);
+	socket.on('unbookResponse',(response)=>{ 
+		if(response.id == socket.id){
+			// Remove the data from the local storage
+			localStorage.removeItem('userData');
+		}
+	});
 }
+
 ///////////// ajax call for GOTIN
 function gotIn(uniqueId) {
 	// let endpoint = `http://localhost:3000/gotin/${uniqueId}`;
@@ -57,5 +74,12 @@ function gotIn(uniqueId) {
 	// 	alert('fail!');
 	// }).always(function () {
 	// });
-	socket.emit('gotIn',{id:uniqueId});
+	const {id} = JSON.parse(localStorage.getItem('userData'));
+	socket.emit('gotIn', id);
+	socket.on('gotInResponse',(response)=>{ 
+		if(response.id == socket.id){
+				// Remove the data from the local storage
+			localStorage.removeItem('userData');
+		}
+	});
 }
