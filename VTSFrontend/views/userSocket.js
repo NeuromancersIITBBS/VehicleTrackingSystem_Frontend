@@ -4,6 +4,10 @@ let socket = io.connect('http://localhost:3000');
 let uniqueId;
 
 $(document).ready(async function () {
+	// Send the request for base data
+	socket.emit('baseDataRequest');
+	// TODO: PROPAGATE THE BASE DATA
+	socket.on('baseData', (data) => {console.log(data)});
 	$('#confirmBook').click(async function () {
 		if(JSON.parse(localStorage.getItem('userData'))==null){
 			console.log("New Session !!")
