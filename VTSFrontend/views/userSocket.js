@@ -5,18 +5,37 @@ let uniqueId;
 
 $(document).ready(async function () {
 	// Send the request for base data
-	socket.emit('baseDataRequest');
+	socket.emit('onConnection');
 	// TODO: PROPAGATE THE BASE DATA
-	socket.on('baseData', (data) => {console.log(data)});
+	socket.on('connectionResponse', (data) => {console.log(data)});
+	/**=======================================
+	 * MOVE THESE CODE TO APPROPRIATE LOCATION 
+	** ========================================*/
+	socket.on('addUser', (user) => {
+		console.log(`Added User ${user.id} in user array`);
+	});
+	socket.on('removeUser', (user) => {
+		console.log(`Removed User ${user.id} from user array`);
+		// If ID matches remove the seesion details
+		if(user.id == JSON.parse(localStorage.getItem('userData')).id){
+			localStorage.removeItem('userData');
+			$('#bookIn').show();
+			$('#bookOut').hide();
+		}
+	});
+
+	/**========================================
+	 * PERFORM THE ACTIONS ON APPROPRIATE ARRAY
+	** ========================================*/
+	if(JSON.parse(localStorage.getItem('userData'))==null){
+		console.log("New Session !!")
+	}
+	else{
+		console.log("Welcome Back !!")
+		$('#bookIn').hide();
+		$('#bookOut').show();
+	}
 	$('#confirmBook').click(async function () {
-		if(JSON.parse(localStorage.getItem('userData'))==null){
-			console.log("New Session !!")
-		}
-		else{
-			console.log("Welcome Back !!")
-			$('#bookIn').hide();
-			$('#bookOut').show();
-		}
 		//alert if the pickup and drop locations are same-
 		if($('#userLocation').val()===$('#destination').val()){
 			alert("The Pickup location and Destination are same !");
