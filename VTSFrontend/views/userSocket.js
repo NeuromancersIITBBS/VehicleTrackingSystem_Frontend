@@ -1,22 +1,33 @@
 // Make Connection
 let socket = io.connect('http://localhost:3000');
-
+let allUsers = [];
 let uniqueId;
 
 $(document).ready(async function () {
 	// Send the request for base data
 	socket.emit('onConnection');
 	// TODO: PROPAGATE THE BASE DATA
-	socket.on('connectionResponse', (data) => {console.log(data)});
+	// alUsers is declared in DriverSocket.
+	socket.on('connectionResponse', (data) => {
+		allUsers = data.userList;
+		allDrivers = data.driverList;
+
+		console.log(allUsers)
+	});
 	/**=======================================
 	 * MOVE THESE CODE TO APPROPRIATE LOCATION 
 	** ========================================*/
 	socket.on('addUser', (user) => {
+		allUsers.push(user);
 		console.log(`Added User ${user.id} in user array`);
 	});
 	socket.on('removeUser', (user) => {
+		//removing user from the user list
+		const index = userList.findIndex(member => member.id == user.id);
+        userList.splice(index, 1);
+
 		console.log(`Removed User ${user.id} from user array`);
-		// If ID matches remove the seesion details
+		// If ID matches remove the session details
 		if(user.id == JSON.parse(localStorage.getItem('userData')).id){
 			localStorage.removeItem('userData');
 			$('#bookIn').show();
@@ -31,9 +42,21 @@ $(document).ready(async function () {
 		console.log("New Session !!")
 	}
 	else{
-		console.log("Welcome Back !!")
-		$('#bookIn').hide();
-		$('#bookOut').show();
+		const userData = JSON.parse(localStorage.getItem('userData'));
+		var present = new Date().getTime();
+		var timePassed= (present - userData.timeStamp)/1000;
+		//console.log(timeStamp);
+		console.log(present);
+		console.log(timePassed);
+		if(timePassed < waitingTime){
+			timeout(waitingTime-timePassed,userData.id);
+			console.log("Welcome Back !!");
+			$('#bookIn').hide();
+			$('#bookOut').show();
+		}
+		else{
+			console.log("The earlier session was timed out, welcome to new sesioin");
+		}
 	}
 	$('#confirmBook').click(async function () {
 		//alert if the pickup and drop locations are same-
@@ -65,11 +88,12 @@ $(document).ready(async function () {
 		else{
 			pickupObj = {
 				pickupPoint: $('#userLocation').val(),
-				
+
 				// needs to be updated
 			};
 			uniqueId = await bookController(pickupObj);
-		}	}
+		}	
+		}
 
 	});
 

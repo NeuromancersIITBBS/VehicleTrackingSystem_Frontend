@@ -5,25 +5,48 @@
  * 	It all starts with the book request
  * ===============================*/
 
-//BOOK function to update the user's location and his destination (ajax POST)
+ const waitingTime = 20*60;
+
+ // Utility Function to set time out
+ //Initiates unbook request if the book request is still on after waiting time
+ function timeout(timeLeft,bookingId){
+		console.log(bookingId);
+		setTimeout(()=>{
+			const {id} = JSON.parse(localStorage.getItem('userData'));
+			console.log(id);
+			if(id === bookingId){
+				unbook();
+				$('#bookOut').hide();
+				$('#bookIn').show();
+				console.log('Session Timed Out');
+				alert('Book request timed out, please book again.');
+			}
+		},timeLeft*1000);
+} 
+
+//BOOK function to update the user's location and his destination 
 
 function book (pickupObject) {
+	//var uID = Math.floor((Math.random() * 1000) + 1); 
 	const userData = {
-		id: socket.id,
+		id : null,
+		socketId: socket.id,
 		location: pickupObject,
 		destination: $("#destination").val(),
 		timeStamp: new Date().getTime()
 	};
-	//localStorage.setItem('userData', JSON.stringify(userData));
-	console.log('Book request successful !');
+
+//	userData.id = uID;
+
 	socket.emit('book', userData);
-	socket.on('bookResponse',(response)=>{ 
-		if(response.id == socket.id){
+	socket.on('bookResponse',(response)=>{
+			//assigning the id from back-end
+			userData.id=response.id;
 			// Store the user data in localStorage
-			localStorage.setItem('userData', JSON.stringify(userData));	
-		} else{
-			console.error('ID not matching');
-		}
+			localStorage.setItem('userData', JSON.stringify(userData));
+			console.log('Book request successful !');
+			//Initiates unbook request if the book request is still on after waiting time
+			timeout(waitingTime,userData.id);
 	});
 	return socket.id;
 }
@@ -33,6 +56,10 @@ function unbook() {
 	socket.emit('unbook',id);
 	socket.on('unbookResponse',(response)=>{ 
 		if(response.id == id){
+			//Removing user from the user list
+			const index = userList.findIndex(member => member.id == id);
+			userList.splice(index, 1);
+			
 			// Remove the data from the local storage
 			localStorage.removeItem('userData');
 		} else{
