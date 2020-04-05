@@ -67,8 +67,8 @@ function coordMap(building){
         {SHR: {lat:0.153740, lng:85.666272}}, 
         {MHR:{lat:20.148305, lng:85.665278}}, 
         {BHR:{lat:20.147952, lng:85.663857}}, 
-        {SC:{lat:20.154707, lng:85.663337}}
-	    {GH:{lat:20.152508, lng:85.662803}}
+        {SC:{lat:20.154707, lng:85.663337}},
+	    {GH:{lat:20.152508, lng:85.662803}},
 	    {CC:{lat:20.152398, lng:85.660945}}];
 
     var Bnumber = getBuildno(building);

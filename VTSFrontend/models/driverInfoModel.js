@@ -1,4 +1,4 @@
-//function to update the driver's occupiedSeats and final destination (ajax POST)
+function to update the driver's occupiedSeats and final destination (ajax POST)
 
 function updateDriverInfo(driverID, occupiedseats, colorCode) {   //colorcode needs to be implemented properly
 	console.log(occupiedseats);

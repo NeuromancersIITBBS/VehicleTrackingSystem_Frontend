@@ -16,7 +16,9 @@
     <script src="./views/userLocation.js"></script>
     <script src="./views/userMap.js"></script>
     <script src="./views/userSocket.js"></script>
-
+    <script src="./views/mapUtilities.js"></script>
+    <script src="./views/locationToBuildingMapping.js"></script>
+    
 
     <!--Controllers-->
     <script src="./controllers/driverInfoController.js"></script>
@@ -127,14 +129,14 @@
                                             <select class="form-control restype" id="userLocation" name="type" required>
 												<option value="BHR" >BHR</option>
 												<option value="YourLocation" selected>My Location</option>
-												<option value="BHR" >MHR</option>
+												<option value="MHR" >MHR</option>
 												<option value="SIF">SIF</option>
-												<option value="SIF">LBC</option>
-												<option value="SIF" >SBS</option>
+												<option value="LBC">LBC</option>
+												<option value="SBS" >SBS</option>
 												<option value="SIF">SES</option>
-												<option value="SIF">MAIN BUILDING</option>
-												<option value="SC" >GHR</option>
-												<option value="SC">SHR</option>
+												<option value="MBLD">MAIN BUILDING</option>
+												<option value="GHR" >GHR</option>
+												<option value="SHR">SHR</option>
 												<option value="SC">SC</option>
 											</select>
                                         </div>
@@ -142,14 +144,14 @@
                                             <label for="Type">Select Destination</label>
                                             <select class="form-control restype" id="destination" name="type" required>
 												<option value="BHR" selected>BHR</option>
-												<option value="BHR">MHR</option>
+												<option value="MHR">MHR</option>
 												<option value="SIF">SIF</option>
-												<option value="SIF">LBC</option>
-												<option value="SIF">SBS</option>
-												<option value="SIF">SES</option>
-												<option value="SIF">MAIN BUILDING</option>
-												<option value="SC">GHR</option>
-												<option value="SC">SHR</option>
+												<option value="LBC">LBC</option>
+												<option value="SBS">SBS</option>
+												<option value="SES">SES</option>
+												<option value="MBLD">MAIN BUILDING</option>
+												<option value="GHR">GHR</option>
+												<option value="SHR">SHR</option>
 												<option value="SC">SC</option>
 											</select>
                                         </div>

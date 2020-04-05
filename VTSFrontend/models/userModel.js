@@ -27,7 +27,9 @@
 //BOOK function to update the user's location and his destination 
 
 function book (pickupObject) {
+
 	//var uID = Math.floor((Math.random() * 1000) + 1); 
+	
 	const userData = {
 		id : null,
 		socketId: socket.id,
@@ -36,20 +38,25 @@ function book (pickupObject) {
 		timeStamp: new Date().getTime()
 	};
 
-//	userData.id = uID;
-
+	//userData.id = uID;
+	
+	//Initiates unbook request if the book request is still on after waiting time
+	timeout(waitingTime,userData.id);
 	socket.emit('book', userData);
 	socket.on('bookResponse',(response)=>{
 			//assigning the id from back-end
 			userData.id=response.id;
+			//add marker to the map
+			addMarker(userData);
 			// Store the user data in localStorage
 			localStorage.setItem('userData', JSON.stringify(userData));
 			console.log('Book request successful !');
 			//Initiates unbook request if the book request is still on after waiting time
 			timeout(waitingTime,userData.id);
 	});
-	return socket.id;
+	return userData.id;
 }
+
 /////// socket call for UNBOOKING
 function unbook() {
 	const {id} = JSON.parse(localStorage.getItem('userData'));
@@ -58,7 +65,7 @@ function unbook() {
 		if(response.id == id){
 			//Removing user from the user list
 			const index = userList.findIndex(member => member.id == id);
-			userList.splice(index, 1);
+			allUsers.splice(index, 1);
 			
 			// Remove the data from the local storage
 			localStorage.removeItem('userData');
