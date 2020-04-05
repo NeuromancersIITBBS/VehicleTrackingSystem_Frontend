@@ -1,12 +1,12 @@
 //Updates driver information to all socket clients
 function updateDriverInfo() {   //colorcode needs to be implemented properly
-	let driverData = JSON.parse(localStorage.getItem('driverData'));
-	driverData
-	console.log(occupiedseats);
-	
+	const driverData = JSON.parse(localStorage.getItem('driverData'));
+	socket.broadcast.emit('updateDriverData',driverData);
+	console.log('updated Driver data');
 	//Driver object
 	socket.emit('updateDriverInfo',{ id: driverID, occupiedSeats: occupiedseats, colorCode: colorCode });
 }
+
 
 //function to get USER data
 	// let endpoint = `http:\\vts_backend`;
