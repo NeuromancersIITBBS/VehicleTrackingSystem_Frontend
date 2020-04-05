@@ -1,6 +1,6 @@
 //Function that calls updateDriverInfo model function.
-function updateDriverInfoController(driverId,occupiedSeats,colorCode){
-    updateDriverInfo(driverId,occupiedSeats,colorCode);
+function updateDriverInfoController(){
+    updateDriverInfo();
 }
 
 

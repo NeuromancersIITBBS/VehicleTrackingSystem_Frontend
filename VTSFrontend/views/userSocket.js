@@ -3,6 +3,7 @@ let socket = io.connect('http://localhost:3000');
 let allUsers = [];
 let allDrivers = [];
 let uniqueId;
+const interval = 20;
 
 $(document).ready(async function () {
 	// Send the request for base data
@@ -15,8 +16,7 @@ $(document).ready(async function () {
 
 		// Defined in userMap.js adds the markers of users and drivers
 		initMarkers();
-
-		console.log(allUsers)
+		console.log(allUsers);
 	});
 	/**=======================================
 	 * MOVE THESE CODE TO APPROPRIATE LOCATION 
@@ -32,14 +32,13 @@ $(document).ready(async function () {
 		//removing user from the user list
 		const index = userList.findIndex(member => member.id == user.id);
         userList.splice(index, 1);
-
-		console.log(`Removed User ${user.id} from user array`);
 		// If ID matches remove the session details
 		if(user.id == JSON.parse(localStorage.getItem('userData')).id){
 			localStorage.removeItem('userData');
 			$('#bookIn').show();
 			$('#bookOut').hide();
 		}
+		console.log(`Removed User ${user.id} from user array`);
 	});
 
 	/**========================================
@@ -56,6 +55,7 @@ $(document).ready(async function () {
 		console.log(present);
 		console.log(timePassed);
 		if(timePassed < waitingTime){
+			//timeout function defined in userModal.js
 			timeout(waitingTime-timePassed,userData.id);
 			console.log("Welcome Back !!");
 			$('#bookIn').hide();

@@ -1,22 +1,10 @@
-
-
-
-function updateDriverInfo(driverID, occupiedseats, colorCode) {   //colorcode needs to be implemented properly
+//Updates driver information to all socket clients
+function updateDriverInfo() {   //colorcode needs to be implemented properly
+	let driverData = JSON.parse(localStorage.getItem('driverData'));
+	driverData
 	console.log(occupiedseats);
-	// let endpoint = `http:\\vts_backend`;
-	// let data = { id: driverID, occupiedSeats: occupiedseats, colorCode: colorCode };
-	// $.ajax({
-	// 	url: endpoint,
-	// 	method: 'POST',
-	// 	data: JSON.stringify(data),
-	// 	contentType: "application/json",
-	// 	error: function (xhr) {
-	// 		alert("Something went wrong, please try again.");
-	// 	},
-	// 	success: function (res) {
-	// 		console.log("Success!");
-	// 	}
-	// });
+	
+	//Driver object
 	socket.emit('updateDriverInfo',{ id: driverID, occupiedSeats: occupiedseats, colorCode: colorCode });
 }
 
