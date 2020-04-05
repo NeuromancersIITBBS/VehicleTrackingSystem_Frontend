@@ -25,7 +25,7 @@ var types = {
     SES : {
         type : 'academicComplex'
     },
-    MBLG : {
+    MBLD : {
         type : 'academicComplex'
     },
     MHR : {
