@@ -64,7 +64,8 @@ function unbook() {
 	socket.on('unbookResponse',(response)=>{ 
 		if(response.id == id){
 			//Removing user from the user list
-			const index = userList.findIndex(member => member.id == id);
+			const index = allUsers.findIndex(member => member.id == id);
+			removeMarker(response);
 			allUsers.splice(index, 1);
 			
 			// Remove the data from the local storage

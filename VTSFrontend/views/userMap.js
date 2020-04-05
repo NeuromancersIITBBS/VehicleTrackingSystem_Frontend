@@ -13,12 +13,12 @@ function initMap() {
 };
 
 function initMarkers() {
-	let numOfMarkers = allUsers.size()
+	let numOfMarkers = allUsers.length
 
 	for (let i = 0; i < numOfMarkers; ++i) {
 		addMarker(allUsers[i]);
 	}
-	numOfMarkers = allDrivers.size()
+	numOfMarkers = allDrivers.length
 	for (let i = 0; i < numOfMarkers; ++i) {
 		addMarker(allDrivers[i]);
 	}
@@ -27,6 +27,7 @@ function initMarkers() {
 
 // Utility function to add marker to the map.
 function addMarker(userData){
+	console.log(userData)
 	let marker = new google.maps.Marker({
 		position: userData.location.location,
 		map: map,
@@ -51,7 +52,8 @@ function addMarker(userData){
 
 //Utility function to remove markers
 function removeMarker(userData){
-	const index = markers.findElement(marker => marker.id == userData.id);
-	markers[index].setMap(null);
+	const index = markers.findIndex(marker => marker.id == userData.id);
+	console.log(markers[index])
+	markers[index].mark.setMap(null);
 	markers.splice(index,1);
 }

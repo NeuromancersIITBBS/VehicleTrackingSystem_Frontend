@@ -30,10 +30,11 @@ $(document).ready(async function () {
 		//removing the user marker in map
 		removeMarker(user);
 		//removing user from the user list
-		const index = userList.findIndex(member => member.id == user.id);
-        userList.splice(index, 1);
+		const index = allUsers.findIndex(member => member.id == user.id);
+        allUsers.splice(index, 1);
 		// If ID matches remove the session details
-		if(user.id == JSON.parse(localStorage.getItem('userData')).id){
+		if(localStorage.getItem('userData') && 
+		user.id == JSON.parse(localStorage.getItem('userData')).id){
 			localStorage.removeItem('userData');
 			$('#bookIn').show();
 			$('#bookOut').hide();

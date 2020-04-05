@@ -1,8 +1,8 @@
 var iconBase =
-            'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
+            '';
 var icons = {
     academicComplex : {
-        icon: iconBase + "./views/TokenImages/AcademicComplexToken.png"
+        icon: iconBase + "./views/TokenImages/AcademicComplex.png"
     },
     BHRSide : {
         icon: iconBase + "./views/TokenImages/BHRSide.png"
