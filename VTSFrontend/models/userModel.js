@@ -89,3 +89,63 @@ function gotIn() {
 		}
 	});
 }
+
+////// Socket Listeners
+
+socket.on('connectionResponse', (data) => {
+	allUsers = data.userList;
+	allDrivers = data.driverList;
+
+	// Defined in userMap.js adds the markers of users and drivers
+	initMarkers();
+	console.log(allUsers);
+});
+
+
+socket.on('addUser', (user) => {
+	allUsers.push(user);
+	addMarker(user);
+	console.log(`Added User ${user.id} in user array`);
+});
+
+
+socket.on('removeUser', (user) => {
+	//removing the user marker in map
+	removeMarker(user);
+	//removing user from the user list
+	const index = allUsers.findIndex(member => member.id == user.id);
+	allUsers.splice(index, 1);
+	// If ID matches remove the session details
+	if(localStorage.getItem('userData') && 
+	user.id == JSON.parse(localStorage.getItem('userData')).id){
+		localStorage.removeItem('userData');
+		$('#bookIn').show();
+		$('#bookOut').hide();
+	}
+	console.log(`Removed User ${user.id} from user array`);
+});
+
+//add new driver marker to map
+socket.on('addDriver',(driverData)=>{
+	addDriverMarker(driverData);
+	allDrivers.push(driverData);
+})
+
+//remove driver from the map
+socket.on('removeDriver',(driverData)=>{
+	removeMarker(driverData);
+	const index = allDrivers.findIndex(driver=> driver.id == driverData.id)
+	allDrivers.splice(index,1);
+})
+
+////////// socket Listener for driverLocationUpdate
+socket.on('updateDriverLocation',(driverData)=>{
+	updateDriverMarker(driverData);
+});
+
+////////// socket Listener for driverDataUpdate
+socket.on('updateDriverData',(driverData)=>{
+	//To be updated.
+	updateDriverTemplate(driverData);
+	updateMarkerStatus(driverData);
+});

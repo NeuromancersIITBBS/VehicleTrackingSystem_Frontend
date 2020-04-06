@@ -74,7 +74,13 @@
 	.latlng p:nth-child(1) { float:left; }
     .latlng p:nth-child(2) { float:right; }	
     
-    html,
+    .buttons{padding:20px 0 0 140px}
+    
+         input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+          }
+    
+        html,
         body {
             height: 100%;
             margin: 0;

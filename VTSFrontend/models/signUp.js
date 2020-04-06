@@ -45,6 +45,13 @@ $( document).ready(function(){
     data:{driverName : driverName, password : password},
         success: function(res) {
             console.log(res);
+            var driverData = {
+                id : res.id,
+                occupancy : null,
+                destination : null,
+            }
+            localStorage.setItem('driverData', JSON.stringify(driverData));
+            
             window.location.href = "./indexDriver.html";
             return true;
         

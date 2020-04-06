@@ -3,7 +3,9 @@ function updateDriverInfoController(){
     updateDriverInfo();
 }
 
-
+function updateDriverLocationController(){
+    updateDriverLocation();
+}
 
 //Function that calls getUserInfo model function.
 // function getUserInfoControler(){

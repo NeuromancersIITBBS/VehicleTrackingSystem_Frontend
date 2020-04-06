@@ -5,6 +5,18 @@ let colorCode;
 let occupiedSeats;
 let allUsers = [];
 let allDrivers = [];
+let timeGap = 20;
+//Dummy Assigning Need to Remove .
+let driverData={
+	id : '3759y3457',
+	occupiedSeats : 0,
+	location : {
+		pickupPoint : 'custom',
+		location : null
+	},
+	destination : 'BHR',
+	status : 'active'
+};
 
 $(document).ready(async function () {
 
@@ -12,71 +24,101 @@ $(document).ready(async function () {
 	// Send the request for base data
 	socket.emit('onConnection');
 
-	//Storing the base data and adding markers to map.
-	socket.on('connectionResponse', (data) => {
-		allUsers = data.userList;
-		allDrivers = data.driverList;
-
-		// Defined in userMap.js adds the markers of users and drivers
-		initMarkers();
-
-		console.log(allDrivers);
-	});
-
-	socket.on('addUser', (user) => {
-		allUsers.push(user);
-		addMarker(user);
-		console.log(`Added User ${user.id} in user array`);
-	});
-	socket.on('removeUser', (user) => {
-		//removing the user marker in map
-		removeMarker(user);
-		//removing user from the user list
-		const index = userList.findIndex(member => member.id == user.id);
-        userList.splice(index, 1);
-
-		console.log(`Removed User ${user.id} from user array`);
-		
-
-	});
 	
-	if(JSON.parse(localStorage.getItem('userData'))==null){
-		console.log("New Session !!")
+	
+	/**=====================================================================
+	 * THE BELOW STATEMENT IS TO BE CHANGED AFTER SIGNUP PAGE IS OPERATIONAL
+	** =====================================================================*/
+	if(JSON.parse(localStorage.getItem('driverData'))==null){
+		console.log("New Session !!");
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(async (position) => {
+				pickupObj = {
+					pickupPoint: 'custom',
+					location: {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					}
+				};
+				console.log(pickupObj);
+				driverData.location = pickupObj;
+				addDriverMarker(driverData);
+				//console.log(driverData);
+			});
+		} else {
+			alert('Geolocation is not supported by this browser.');
+		  }
 	}
 	else{
-		let driverData = JSON.parse(localStorage.getItem('userData'));
-		$('#occupiedSeats').placeholder = driverData.occupancy;
+		driverData = JSON.parse(localStorage.getItem('driverData'));
+		$('#occupiedSeats').parent().find("input").val(driverData.occupiedSeats);
+		$('#bovDestination').parent().find("input").val(driverData.destination);
+		//defined in driverInfoView.js try to improve the code quality.
+		selectOption(driverData.destination);
+		$('#status').parent().find("input").val(driverData.status);
 	}
 
+	//routine to update Loction after every timeGap seconds
+	//need to be tested
+	setInterval(()=>{
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(async (position) => {
+				pickupObj = {
+					pickupPoint: 'custom',
+					location: {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					}
+				};
+				driverData.location = pickupObj;
+				updateDriverLocationController();
+			});
+		} else {
+			alert('Geolocation is not supported by this browser.');
+		  }
+	},timeGap*1000); 
+
 	$('#updateDriverInfoBtn').click(()=>{
-		localStorage.removeItem('driverData');
-		driverData = {
-			id = driverID,
-			occupancy = $('#occupiedseats').value(),
-			destination = $('#bovDestination').value(),
-			status = $('#status').value()
+		if(JSON.parse(localStorage.getItem('driverData'))!=null){
+			localStorage.removeItem('driverData');
 		}
-		localStorage.setItem('driverData', JSON.stringify(userData));
-		updateDriverInfoController();
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(async (position) => {
+				pickupObj = {
+					pickupPoint: 'custom',
+					location: {
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
+					}
+				};
+				driverData.location= pickupObj;
+				//console.log(location);
+				
+			});
+		} else {
+			alert('Geolocation is not supported by this browser.');
+		}
+		driverData.destination= $("#bovDestination").val();
+		driverData.status= $("#status").val();
+		driverData.occupiedSeats= $("#occupiedSeats").val();
+		localStorage.setItem('driverData', JSON.stringify(driverData));
+		let data= JSON.parse(localStorage.getItem('driverData'));
+		console.log(data,driverData);
+		//console.log(location);
+		updateDriverInfoController(driverData);
+		console.log('updated successfully !');
 	});
+	console.log("I am here.")
+
 	//On Logout Functionalities
+	//Need to be tested
 	$('#logOut').click( async function(){
 		//needs to be updated.
-
+		if(JSON.parse(localStorage.getItem('driverData'))!=null){
+			localStorage.removeItem('driverData');
+		}
+		socket.emit('removeDriver',driverData);
 	}); 
 });
-
-// // Call back function for getLocation
-// function emitLocation(location) {
-// 	socket.emit('location', {
-// 		id: driverID,
-// 		location: {
-// 			lat: location.coords.latitude,
-// 			lng: location.coords.longitude
-// 		},
-// 		timestamp: Date.now()
-// 	});
-// 	console.log(location);
-// }
 
 

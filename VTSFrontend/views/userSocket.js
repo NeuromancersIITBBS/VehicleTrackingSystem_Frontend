@@ -8,43 +8,8 @@ const interval = 20;
 $(document).ready(async function () {
 	// Send the request for base data
 	socket.emit('onConnection');
-	// TODO: PROPAGATE THE BASE DATA
+
 	
-	socket.on('connectionResponse', (data) => {
-		allUsers = data.userList;
-		allDrivers = data.driverList;
-
-		// Defined in userMap.js adds the markers of users and drivers
-		initMarkers();
-		console.log(allUsers);
-	});
-	/**=======================================
-	 * MOVE THESE CODE TO APPROPRIATE LOCATION 
-	** ========================================*/
-	socket.on('addUser', (user) => {
-		allUsers.push(user);
-		addMarker(user);
-		console.log(`Added User ${user.id} in user array`);
-	});
-	socket.on('removeUser', (user) => {
-		//removing the user marker in map
-		removeMarker(user);
-		//removing user from the user list
-		const index = allUsers.findIndex(member => member.id == user.id);
-        allUsers.splice(index, 1);
-		// If ID matches remove the session details
-		if(localStorage.getItem('userData') && 
-		user.id == JSON.parse(localStorage.getItem('userData')).id){
-			localStorage.removeItem('userData');
-			$('#bookIn').show();
-			$('#bookOut').hide();
-		}
-		console.log(`Removed User ${user.id} from user array`);
-	});
-
-	/**========================================
-	 * PERFORM THE ACTIONS ON APPROPRIATE ARRAY
-	** ========================================*/
 	if(JSON.parse(localStorage.getItem('userData'))==null){
 		console.log("New Session !!")
 	}

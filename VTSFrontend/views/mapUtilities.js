@@ -2,13 +2,28 @@ var iconBase =
             '';
 var icons = {
     academicComplex : {
-        icon: iconBase + "./views/TokenImages/AcademicComplex.png"
+        icon: iconBase + "./views/Images/AcademicComplex.png"
     },
     BHRSide : {
-        icon: iconBase + "./views/TokenImages/BHRSide.png"
+        icon: iconBase + "./views/Images/BHRSide.png"
     },
     SHRSide : {
-        icon: iconBase + "./views/TokenImages/SHRSide.png"
+        icon: iconBase + "./views/Images/SHRSide.png"
+    }
+}
+
+var driverIcons = {
+    academicComplex : {
+        icon: iconBase + "./views/Images/driverAcademicComplex.png"
+    },
+    BHRSide : {
+        icon: iconBase + "./views/Images/driverBHRSide.png"
+    },
+    SHRSide : {
+        icon: iconBase + "./views/Images/driverSHRSide.png"
+    },
+    Inactive : {
+        icon: iconBase + "./views/Images/inactive.png"
     }
 }
 
