@@ -1,6 +1,8 @@
-//these two functions initialize map
 let map;
 let markers = [];
+
+
+
 function initMap() {
 	const options = {
 		center: {
@@ -9,21 +11,16 @@ function initMap() {
 		},
 		zoom: 15
 	};
-	map = new google.maps.Map(document.getElementById('map'), options);
+	map = new google.maps.Map(document.getElementById('drivermap'), options);
 };
 
 function initMarkers() {
-	let numOfMarkers = allUsers.length
+	let numOfMarkers = allUsers.size()
 
 	for (let i = 0; i < numOfMarkers; ++i) {
-		if(typeof allUsers[i].location == undefined){
-			console.log(allUsers[i]);
-		}
-		else{
-			addMarker(allUsers[i]);
-		}
+		addMarker(allUsers[i]);
 	}
-	numOfMarkers = allDrivers.length
+	numOfMarkers = allDrivers.size()
 	for (let i = 0; i < numOfMarkers; ++i) {
 		if(typeof allDrivers[i].location == undefined){
 			console.log(allDrivers[i]);
@@ -37,7 +34,6 @@ function initMarkers() {
 
 // Utility function to add marker to the map.
 function addMarker(userData){
-	console.log(userData)
 	let marker = new google.maps.Marker({
 		position: userData.location.location,
 		map: map,
@@ -60,7 +56,6 @@ function addMarker(userData){
 	markers.push(markerObj);
 }
 
-// Same as above just made to differentiate user and driverIcons. 
 function addDriverMarker(userData){
 	let marker = new google.maps.Marker({
 		position: userData.location.location,
@@ -68,10 +63,6 @@ function addDriverMarker(userData){
 		// types and icons defined in map utilities.
 		icon: driverIcons[types[userData.destination].type].icon
 	});
-	if(userData.status!='active'){
-		marker.icon = './views/Images/inactive.png'; 
-	}
-	else{
 	let contentString = '<strong> Destination : </strong>'+'<strong>'+userData.destination+'</strong>';
 
 	let infowindow = new google.maps.InfoWindow({
@@ -80,27 +71,12 @@ function addDriverMarker(userData){
 	marker.addListener('click', function() {
 		infowindow.open(map, marker);
 	  });
-	}
 	var markerObj = {
 		id : userData.id,
 		mark : marker
 	}
 	console.log(markerObj);
 	markers.push(markerObj);
-}
-
-function updateDriverMarker(driverData){
-	const index = markers.findIndex(marker => marker.id == driverData.id);
-	console.log(markers[index]);
-	markers[index].mark.setMap(driverData.location.location);
-}
-
-//Utility function to remove markers
-function removeMarker(userData){
-	const index = markers.findIndex(marker => marker.id == userData.id);
-	console.log(markers[index])
-	markers[index].mark.setMap(null);
-	markers.splice(index,1);
 }
 
 // Check if there is a change in status or destination update the colour of the driver marker.
@@ -119,4 +95,18 @@ function updateDriverMarker(driverData){
 			markers[index].marker.icon = './views/Images/inactive.png';
 		}
 	}
+}
+
+//Updates Driver Marker Location
+function updateDriverMarker(driverData){
+	const index = markers.findIndex(marker => marker.id == driverData.id);
+	console.log(markers[index]);
+	markers[index].mark.setMap(driverData.location.location);
+}
+
+//Utility function to remove markers
+function removeMarker(userData){
+	const index = markers.findElement(marker => marker.id == userData.id);
+	markers[index].setMap(null);
+	markers.splice(index,1);
 }

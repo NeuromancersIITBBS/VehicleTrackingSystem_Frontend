@@ -5,11 +5,11 @@ async function bookController(pickUpLocation){
 }
 
 //controller function that calls unbook model function.
-function unbookController(uniqueNumber){
-    unbook(uniqueNumber);
+function unbookController(){
+    unbook();
 }
 
 //controller function that calls gotIn model function.
-function gotInController(uniqueNumber){
-    unbook(uniqueNumber);
+function gotInController(){
+    gotIn();
 }

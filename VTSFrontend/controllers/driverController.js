@@ -1,9 +1,11 @@
 //Function that calls updateDriverInfo model function.
-function updateDriverInfoController(driverId,occupiedSeats,colorCode){
-    updateDriverInfo(driverId,occupiedSeats,colorCode);
+function updateDriverInfoController(){
+    updateDriverInfo();
 }
 
-
+function updateDriverLocationController(){
+    updateDriverLocation();
+}
 
 //Function that calls getUserInfo model function.
 // function getUserInfoControler(){
