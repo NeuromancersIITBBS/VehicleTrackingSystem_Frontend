@@ -13,6 +13,10 @@ $( document).ready(function(){
         $("#logindiv").hide();
         $("#signupdiv").show();
     })
+    $("#login").on('click' , function(event){
+        $("#logindiv").show();
+        $("#signupdiv").hide();
+    })
 })
   var  submit = async function(driverName,password,phoneNumber){
      
