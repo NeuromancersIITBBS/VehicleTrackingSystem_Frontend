@@ -4,12 +4,21 @@ let allUsers = [];
 let allDrivers = [];
 let uniqueId;
 const interval = 20;
+let dummyUser={
+	id: 'SDSFBJQ34724tu',
+	location :{
+		pickupPoint : 'MBLD',
+		location : {lat:20.148816, lng:85.671412}
+	},
+	destination : 'SHR'
+}
 
 $(document).ready(async function () {
 	// Send the request for base data
 	socket.emit('onConnection');
 
-	
+	addMarker(dummyUser);
+	console.log('Marker Added');
 	if(JSON.parse(localStorage.getItem('userData'))==null){
 		console.log("New Session !!")
 	}

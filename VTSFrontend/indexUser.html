@@ -39,7 +39,7 @@
 <body>
     <div class="container-fluid" id="navBar">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="background-color: #563D7C!important;">
-            <a class="navbar-brand" href="#">VTS</a>
+            <a class="navbar-brand" href="#"><strong>VTS</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			  <span class="navbar-toggler-icon"></span>
 			</button>
@@ -90,19 +90,9 @@
     <div class="container-fluid" id="bovDetails">
         <div class="row">
             <div class="col-sm" id="bov1" style=" background-color:white">
-                <h4 id="bov1h4">Going to LBC</h4>
-                <h5 id="bov1h5">Vacancies:5</h5>
-                <h5 id="bov1h5">Status :LBC</h5>
-            </div>
-            <div class="col-sm" id="bov2" style="background-color:white; color:green">
-                <h4 id="bov2h4"></h4>
-                <h5 id="bov2h5"></h5>
-                <h5 id="bov2h5"></h5>
-            </div>
-            <div class="col-sm" id="bov3" style="background-color:white; color:blue">
-                <h4 id="bov3h4"></h4>
-                <h5 id="bov3h5"></h5>
-                <h5 id="bov3h5"></h5>
+                <h4 id="bov1h4">Destination : LBC</h4>
+                <h4 id="bov1h5">Seats Occupied : 5</h4>
+                <h4 id="bov1h5">Status : Active</h4>
             </div>
         </div>
     </div>
@@ -124,8 +114,8 @@
                                 <form enctype="multipart/form-data">
                                     <div class="form-row">
                                         <div class="form-group col-sm-6">
-                                            <label for="Type">Select Pickup Location</label>
-                                            <select class="form-control restype" id="userLocation" name="type" required>
+                                            <label for="Type" style="font-size:1.5vh!important;">Select Pickup Location</label>
+                                            <select class="form-control restype" style="font-size:1.5vh!important;" id="userLocation" name="type" required>
 												<option value="BHR" >BHR</option>
 												<option value="YourLocation" selected>My Location</option>
 												<option value="MHR" >MHR</option>
@@ -139,9 +129,9 @@
 												<option value="SC">SC</option>
 											</select>
                                         </div>
-                                        <div class="form-group col-sm-4">
-                                            <label for="Type">Select Destination</label>
-                                            <select class="form-control restype" id="destination" name="type" required>
+                                        <div class="form-group col-sm-6">
+                                            <label for="Type" style="font-size:1.5vh!important;">Select Destination</label>
+                                            <select class="form-control restype" style="font-size:1.5vh!important;" id="destination" name="type" required>
 												<option value="BHR" selected>BHR</option>
 												<option value="MHR">MHR</option>
 												<option value="SIF">SIF</option>
@@ -168,10 +158,10 @@
             </div>
         </div>
         <div class="row" id="bookOut" style="display:none">
-            <div class="col-sm">
+            <div class="col-sm-6">
                 <button type="button" id="unBook" class="btn btn-primary btn-lg btn-block" style="display:block; background-color: #563D7C!important;">UNBOOK</button>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-6">
                 <button type="button" id="gotIn" class="btn btn-primary btn-lg btn-block" style="display:block;background-color: #563D7C!important;">GOTIN</button>
             </div>
         </div>

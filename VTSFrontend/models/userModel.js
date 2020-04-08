@@ -146,6 +146,7 @@ socket.on('updateDriverLocation',(driverData)=>{
 ////////// socket Listener for driverDataUpdate
 socket.on('updateDriverData',(driverData)=>{
 	//To be updated.
+	updateDriverMarker(driverData);
 	updateDriverTemplate(driverData);
 	updateMarkerStatus(driverData);
 });
