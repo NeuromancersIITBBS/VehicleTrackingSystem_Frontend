@@ -1,4 +1,5 @@
 $( document).ready(function(){    
+    $("#signupdiv").hide();
     $("#signup").on('submit',async function(event){
         event.preventDefault();
         var driverName = $("#driverName").val();
@@ -7,6 +8,14 @@ $( document).ready(function(){
         //console.log(driverName,phoneNumber,password);
         let res = await submit(driverName,phoneNumber,password);
         console.log(res);
+    })
+    $("#register").on('click' , function(event){
+        $("#logindiv").hide();
+        $("#signupdiv").show();
+    })
+    $("#login").on('click' , function(event){
+        $("#logindiv").show();
+        $("#signupdiv").hide();
     })
 })
   var  submit = async function(driverName,password,phoneNumber){
