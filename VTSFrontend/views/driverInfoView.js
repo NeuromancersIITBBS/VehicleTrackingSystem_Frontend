@@ -4,7 +4,7 @@
 var button = 0;
 var myUsers = [];
 var notMyUsers = [];
-
+function driverInfoView(){
 $(document).ready(async function () {
 
 	//Increment and Decrement Listeners - Defined in driverInfoView.js
@@ -58,6 +58,7 @@ $(document).ready(async function () {
 		}
 	});
 });
+}
 
 function selectOption(place){
 	if(place=="LBC"){

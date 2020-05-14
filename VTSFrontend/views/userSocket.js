@@ -12,7 +12,7 @@ let dummyUser={
 	},
 	destination : 'SHR'
 }
-
+function after_init_map_user(){
 $(document).ready(async function () {
 	// Send the request for base data
 	socket.emit('onConnection');
@@ -93,3 +93,4 @@ $(document).ready(async function () {
 	//markers = initMarkers(3);
 	//socket.on('driverInfo', updateLocation);
 });
+}

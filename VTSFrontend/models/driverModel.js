@@ -1,4 +1,4 @@
-
+//This file contains all the socket listeners for driver.
 //Updates driver information to all socket clients
 function updateDriverInfo() {   
 	socket.broadcast.emit('updateDriverData',driverData);
@@ -17,7 +17,7 @@ socket.on('connectionResponse', (data) => {
 	//Arrays declared in driverSocket
 	allUsers = data.userList;
 	allDrivers = data.driverList;
-
+	
 	// Defined in userMap.js adds the markers of users and drivers
 	initMarkers();
 
@@ -31,7 +31,7 @@ socket.on('addUser', (user) => {
 });
 socket.on('removeUser', (user) => {
 	//removing the user marker in map
-	removeMarker(user);
+	removeUserMarker(user);
 	//removing user from the user list
 	const index = userList.findIndex(member => member.id == user.id);
 	userList.splice(index, 1);
@@ -50,8 +50,8 @@ socket.on('addDriver',(driverData)=>{
 
 //Remove driver from the map
 socket.on('removeDriver',(driverData)=>{
-	removeMarker(driverData);
-	const index = allDrivers.findIndex(driver=> driver.id == driverData.id)
+	removeDriverMarker(driverData);
+	const index = allDrivers.findIndex(driver=> driver.phoneNumber == driverData.phoneNumber)
 	allDrivers.splice(index,1);
 })
 

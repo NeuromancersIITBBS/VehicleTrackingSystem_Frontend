@@ -8,7 +8,8 @@ let allDrivers = [];
 let timeGap = 20;
 //Dummy Assigning Need to Remove .
 let driverData={
-	id : '3759y3457',
+	phoneNumber : '3759y3457',
+	key : 'awfdrberigewebu',
 	occupiedSeats : 0,
 	location : {
 		pickupPoint : 'custom',
@@ -18,12 +19,13 @@ let driverData={
 	status : 'active'
 };
 
+function after_init_map_driver(){
 $(document).ready(async function () {
 
 
 	// Send the request for base data
 	socket.emit('onConnection');
-
+	// The socket respones are in driverModel.js
 	
 	
 	/**=====================================================================
@@ -62,7 +64,7 @@ $(document).ready(async function () {
 	//   }
 
 	//routine to update Loction after every timeGap seconds
-	//need to be tested
+	//needs to be tested
 	setInterval(()=>{
 		if(navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(async (position) => {
@@ -124,4 +126,4 @@ $(document).ready(async function () {
 	}); 
 });
 
-
+}
