@@ -60,7 +60,7 @@ function addMarker(userData){
 
 function addDriverMarker(driverData){
 	let marker = new google.maps.Marker({
-		position: userData.location.location,
+		position: driverData.location.location,
 		map: map,
 		// types and icons defined in map utilities.
 		icon: driverIcons[types[driverData.destination].type].icon

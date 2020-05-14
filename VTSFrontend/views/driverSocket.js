@@ -20,6 +20,7 @@ let driverData={
 };
 
 function after_init_map_driver(){
+	console.log('Init map is executed');
 $(document).ready(async function () {
 
 
@@ -33,10 +34,11 @@ $(document).ready(async function () {
 	** =====================================================================*/
 	// Local Storage imlentation
 	if(JSON.parse(localStorage.getItem('driverData'))==null){
-		console.log("New Session !!");
+		console.log("New Session !!")
 		localStorage.setItem('driverData', JSON.stringify(driverData));
 	}
 	else{
+		console.log("Session recovered, phoneNumber is "+driverData.phoneNumber+"!!")
 		driverData = JSON.parse(localStorage.getItem('driverData'));
 		$('#occupiedSeats').parent().find("input").val(driverData.occupiedSeats);
 		$('#bovDestination').parent().find("input").val(driverData.destination);
