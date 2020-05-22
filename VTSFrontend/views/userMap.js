@@ -1,6 +1,8 @@
 //these two functions initialize map
 let map;
 let markers = [];
+let marker;
+
 function initMap() {
 	const options = {
 		center: {
@@ -10,6 +12,7 @@ function initMap() {
 		zoom: 15.1
 	};
 	map = new google.maps.Map(document.getElementById('map'), options);
+	setupSocketUser();
 	after_init_map_user();
 };
 
@@ -25,6 +28,7 @@ function initMarkers() {
 		}
 		else{
 			addMarker(allUsers[i]);
+			console.log("Marker added : "+ allUsers[i]);
 		}
 	}
 	numOfMarkers = allDrivers.length
@@ -46,7 +50,8 @@ function addMarker(userData){
 		position: userData.location.location,
 		map: map,
 		// types and icons defined in map utilities.
-		icon: `http://maps.google.com/mapfiles/kml/paddle.png`//for testing purpose
+		icon: icons[types[userData.destination].type].icon
+		//`http://maps.google.com/mapfiles/kml/paddle.png`//for testing purpose
 		//icons[types[userData.destination].type].icon
 	});
 	let contentString = '<strong> Destination : </strong>'+'<strong>'+userData.destination+'</strong>';
@@ -67,7 +72,7 @@ function addMarker(userData){
 
 // Same as above just made to differentiate user and driverIcons. 
 function addDriverMarker(userData){
-	let marker = new google.maps.Marker({
+	marker = new google.maps.Marker({
 		position: userData.location.location,
 		map: map,
 		// types and icons defined in map utilities.
@@ -94,43 +99,77 @@ function addDriverMarker(userData){
 	markers.push(markerObj);
 }
 
-//Utility function to update driver marker location
+//Updates Driver Marker Location
 function updateDriverMarker(driverData){
 	const index = markers.findIndex(marker => marker.phoneNumber == driverData.phoneNumber);
-	console.log(markers[index]);
-	markers[index].mark.setMap(driverData.location.location);
+	//console.log(markers[index]);
+	if(index === -1){
+		console.error("Index not found");
+	}
+	else{
+		markers[index].mark.setMap(driverData.location.location);
+		markers[index].mark.position = driverData.location.location;
+		console.log(`Present location is ${markers[index].mark.position}`);
+	}
+}
+
+
+// Check if there is a change in status or destination update the colour of the driver marker.
+function updateDriverStatus(driverData){
+	const index = markers.findIndex(marker => marker.phoneNumber == driverData.phoneNumber);
+	console.log("Checking if update is required...");
+	if(driverData.status=="active"){
+		console.log("Updating marker");
+		if(markers[index].mark.icon=='./views/Images/inactive.png'){
+			markers[index].mark.icon = driverIcons[types[driverData.destination].type].icon;
+			removeDriverMarker(driverData);
+			addDriverMarker(driverData);
+			console.log("Updated marker to active.");
+		}
+		//else if(markers[index].mark.icon!=driverIcons[types[driverData.destination].type].icon){
+		else{
+			markers[index].mark.icon = driverIcons[types[driverData.destination].type].icon;
+			console.log("Updating marker color");
+			removeDriverMarker(driverData);
+			addDriverMarker(driverData);
+			console.log("Update completed.");
+		}
+	}
+	else{
+		if(markers[index].mark.icon!='./views/Images/inactive.png'){
+			markers[index].mark.icon = './views/Images/inactive.png';
+			removeDriverMarker(driverData);
+			addDriverMarker(driverData);
+			console.log("Updated marker to in-active.");
+		}
+	}
 }
 
 //Utility function to remove user marker
 function removeUserMarker(userData){
 	const index = markers.findIndex(marker => marker.id == userData.id);
-	console.log(markers[index])
-	markers[index].mark.setMap(null);
-	markers.splice(index,1);
+	if(index === -1){
+		console.error("Marker not found");
+	}
+	else{
+		//console.log(markers[index]);
+		markers[index].mark.setMap(null);
+		markers.splice(index,1);
+		console.log('Removed marker');
+	}
 }
 
 //Utility function to remove driver marker
 function removeDriverMarker(driverData){
 	const index = markers.findIndex(marker => marker.phoneNumber == driverData.phoneNumber);
-	console.log(markers[index])
-	markers[index].mark.setMap(null);
-	markers.splice(index,1);
-}
-
-// Check if there is a change in status or destination update the colour of the driver marker.
-function updateDriverStatus(driverData){
-	const index = markers.findIndex(marker => marker.phoneNumber == driverData.phoneNumber);
-	if(driverData.status=="active"){
-		if(markers[index].marker.icon=='./views/Images/inactive.png'){
-			markers[index].marker.icon = driverIcons[types[driverData.destination].type].icon;
-		}
-		else if(marker[index].marker.icon!=driverIcons[types[driverData.destination].type].icon){
-			marker[index].marker.icon = driverIcons[types[driverData.destination].type].icon
-		}
+	if(index === -1){
+		console.error("Marker not found");
 	}
 	else{
-		if(markers[index].marker.icon!='./views/Images/inactive.png'){
-			markers[index].marker.icon = './views/Images/inactive.png';
-		}
+		//console.log(markers[index]);
+		markers[index].mark.setMap(null);
+		markers.splice(index,1);
+		console.log('Removed marker');
 	}
 }
+

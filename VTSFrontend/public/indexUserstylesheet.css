@@ -59,3 +59,10 @@
             margin: 0;
             padding: 0;
         }
+
+    /*Styling the dialog box above the marker*/
+    .gm-style .gm-style-iw {
+        font-weight: 300;
+        font-size: 2vh;
+        overflow: hidden;
+    }

@@ -41,11 +41,12 @@ $(document).ready(async function () {
 		if(typeof driverData.destiniation != undefined){
 			if(driverData.destination != null){
 				if(button==0){
+					console.log("Filtering my users");
 					button = 1;
 					notMyUsers=allUsers.filter(user => user.destination != driverData.destination );
 					let numOfUsers = notMyUsers.length;
-					for(let i=0; i<numOfUsers.length;i++){
-						removeMarker(notMyUsers[i]);
+					for(let i=0; i<numOfUsers;i++){
+						removeUserMarker(notMyUsers[i]);
 					}
 				}
 			}

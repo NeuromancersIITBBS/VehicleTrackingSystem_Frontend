@@ -19,6 +19,7 @@ let driverData={
 	status : 'active'
 };
 
+//function call in driverMap.js
 function after_init_map_driver(){
 	console.log('Init map is executed');
 $(document).ready(async function () {
@@ -115,7 +116,7 @@ $(document).ready(async function () {
 		updateDriverInfoController(driverData);
 		console.log('updated successfully !');
 	});
-	console.log("I am here.")
+	//console.log("I am here.")
 
 	//On Logout Functionalities
 	//Need to be tested

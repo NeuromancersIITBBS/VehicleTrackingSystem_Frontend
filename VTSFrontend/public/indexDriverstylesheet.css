@@ -35,6 +35,12 @@
         padding-right :inherit;
     }
     
+    /*Styling the dialog box above the marker*/
+    .gm-style .gm-style-iw {
+        font-weight: 300;
+        font-size: 2vh;
+        overflow: hidden;
+    }
     /* } font-size: 40px!important; */
 
 	/* #VTS {
