@@ -26,6 +26,7 @@ $(document).ready(async function () {
 	});
 
 	$("#allUsers").on("click", () => {
+		var driverData = JSON.parse(localStorage.getItem('driverData'));
 		if(driverData.destination != null){
 			if(button!=0){
 				button = 0;
@@ -38,6 +39,7 @@ $(document).ready(async function () {
 		}
 	});
 	$("#myUsers").on("click", () => {
+		var driverData = JSON.parse(localStorage.getItem('driverData'));
 		if(typeof driverData.destiniation != undefined){
 			if(driverData.destination != null){
 				if(button==0){

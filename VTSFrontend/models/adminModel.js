@@ -1,5 +1,5 @@
 function allDriversModel(){
-  let endpoint = 'http://localhost:3000/allDrivers';
+  let endpoint = 'https://vts189.herokuapp.com/allDrivers';
   let ans;
   $.ajax({
     url: endpoint,
@@ -17,7 +17,7 @@ function allDriversModel(){
 
 function reqDriversModel(){
   let ans;
-  let endpoint = 'http://localhost:3000/getRequestedDrivers';
+  let endpoint = 'https://vts189.herokuapp.com/getRequestedDrivers';
   $.ajax({
     url: endpoint,
     method: 'GET',
@@ -34,7 +34,7 @@ function reqDriversModel(){
 
 function driverVerifiModel(req){
 
-  let endpoint = `http://localhost:3000/DriverVerified`;
+  let endpoint = `https://vts189.herokuapp.com/DriverVerified`;
 	let jsObj = {
 		verifiedDriverList: req,
 	};
@@ -56,7 +56,7 @@ function driverVerifiModel(req){
 
 function deleteDriverModel(req){
 
-  let endpoint = `http://localhost:3000/deleteDriver`;
+  let endpoint = `https://vts189.herokuapp.com/deleteDriver`;
 	let jsObj = {
 		phoneNumber: req.phoneNumber,
 	};
@@ -78,7 +78,7 @@ function deleteDriverModel(req){
 
 function rejectDriverModel(req){
 
-  let endpoint = `http://localhost:3000/rejectDriver`;
+  let endpoint = `https://vts189.herokuapp.com/rejectDriver`;
 	let jsObj = {
 		phoneNumber: req.phoneNumber,
 	};

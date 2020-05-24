@@ -45,7 +45,7 @@ function initMarkers() {
 
 // Utility function to add marker to the map.
 function addMarker(userData){
-	console.log(userData)
+	console.log(userData);
 	let marker = new google.maps.Marker({
 		position: userData.location.location,
 		map: map,
@@ -72,8 +72,9 @@ function addMarker(userData){
 
 // Same as above just made to differentiate user and driverIcons. 
 function addDriverMarker(userData){
+	console.log("Adding driver marker : "+userData.phoneNumber);
 	marker = new google.maps.Marker({
-		position: userData.location.location,
+		position: userData.location,
 		map: map,
 		// types and icons defined in map utilities.
 		icon: driverIcons[types[userData.destination].type].icon
@@ -101,14 +102,15 @@ function addDriverMarker(userData){
 
 //Updates Driver Marker Location
 function updateDriverMarker(driverData){
+	console.log(driverData);
 	const index = markers.findIndex(marker => marker.phoneNumber == driverData.phoneNumber);
 	//console.log(markers[index]);
 	if(index === -1){
 		console.error("Index not found");
 	}
 	else{
-		markers[index].mark.setMap(driverData.location.location);
-		markers[index].mark.position = driverData.location.location;
+		markers[index].mark.setMap(driverData.location);
+		markers[index].mark.position = driverData.location;
 		console.log(`Present location is ${markers[index].mark.position}`);
 	}
 }

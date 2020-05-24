@@ -1,5 +1,5 @@
 // Make Connection
-let socket = io.connect('http://localhost:3000');
+let socket = io.connect('https://vts189.herokuapp.com');
 let allUsers = [];
 let allDrivers = [];
 let uniqueId;
@@ -16,6 +16,9 @@ const interval = 20;
 //function call in userMap.js
 function after_init_map_user(){
 $(document).ready(async function () {
+	
+	//localStorage.removeItem('driverData');
+
 	// Send the request for base data
 	socket.emit('onConnection');
 
@@ -54,20 +57,17 @@ $(document).ready(async function () {
 		// Get GPS location of User
 		
 		if($('#userLocation').val()==='YourLocation'){
-			if(navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(async (position) => {
-					pickupObj = {
-						pickupPoint: 'custom',
-						location: {
-							lat: position.coords.latitude,
-							lng: position.coords.longitude
-						}
-					};
-					uniqueId = await bookController(pickupObj);
-				});
-			} else {
-				alert('Geolocation is not supported by this browser.');
-			  }
+			$.get("https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572", function(data, status){
+				const userData = JSON.parse(data);
+				pickupObj = {
+					pickupPoint: 'custom',
+					location: {
+						lat: userData.latitude,
+						lng: userData.longitude,
+					}
+				};
+			});
+			uniqueId = await bookController(pickupObj);
 		}
 		else{
 			pickupObj = {

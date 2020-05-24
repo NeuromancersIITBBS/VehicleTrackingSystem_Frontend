@@ -20,17 +20,18 @@ function initMap() {
 
 function initMarkers() {
 	let numOfMarkers = allUsers.length
-
+	
 	for (let i = 0; i < numOfMarkers; ++i) {
 		addMarker(allUsers[i]);
 	}
-	numOfMarkers = allDrivers.length
+	numOfMarkers = allDrivers.length;
+	console.log(numOfMarkers);
 	for (let i = 0; i < numOfMarkers; ++i) {
 		if(typeof allDrivers[i].location == undefined){
 			console.log(allDrivers[i]);
 		}
 		else{
-			addMarker(allDrivers[i]);
+			addDriverMarker(allDrivers[i]);
 		}		
 	}
 	//return markers;
@@ -61,8 +62,9 @@ function addMarker(userData){
 }
 
 function addDriverMarker(driverData){
+	console.log(driverData);
 	marker = new google.maps.Marker({
-		position: driverData.location.location,
+		position: driverData.location,
 		map: map,
 		// types and icons defined in map utilities.
 		icon: driverIcons[types[driverData.destination].type].icon
@@ -121,14 +123,15 @@ function updateDriverStatus(driverData){
 
 //Updates Driver Marker Location
 function updateDriverMarker(driverData){
+
 	const index = markers.findIndex(marker => marker.phoneNumber == driverData.phoneNumber);
 	//console.log(markers[index]);
 	if(index === -1){
 		console.error("Index not found");
 	}
 	else{
-		markers[index].mark.setMap(driverData.location.location);
-		markers[index].mark.position = driverData.location.location;
+		markers[index].mark.setMap(driverData.location);
+		markers[index].mark.position = driverData.location;
 		console.log(`Present location is ${markers[index].mark.position}`);
 	}
 }

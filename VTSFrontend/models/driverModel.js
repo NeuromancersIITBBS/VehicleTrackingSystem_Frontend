@@ -1,6 +1,7 @@
 //This file contains all the socket listeners for driver.
 //Updates driver information to all socket clients
 function updateDriverInfo() {   
+	const driverData = JSON.parse(localStorage.getItem('driverData'));
 	socket.emit('updateDriverData',driverData);
 	console.log('Calling for driver update');
 	updateDriverStatus(driverData);
@@ -9,11 +10,14 @@ function updateDriverInfo() {
 }
 
 function updateDriverLocation(){
+	const driverData = JSON.parse(localStorage.getItem('driverData'));
 	socket.emit('updateDriverLocation',driverData);
 	updateDriverMarker(driverData);
 }
 
 function setupSocketDriver(){
+
+	
 
 	//Storing the base data and adding markers to map.
 	
@@ -22,10 +26,10 @@ function setupSocketDriver(){
 		//Arrays declared in driverSocket
 		allUsers = data.userList;
 		allDrivers = data.driverList;
-	
+		console.log('All users :' + allUsers);
+		console.log('All Drivers : ' + allDrivers);
 		// Defined in userMap.js adds the markers of users and drivers
 		initMarkers();
-
 		console.log(allDrivers);
 	});
 
@@ -49,8 +53,20 @@ function setupSocketDriver(){
 
 	//Add new driver marker to map
 	socket.on('addDriver',(driverData)=>{
+		if(JSON.parse(localStorage.getItem('driverData'))==null){
+			console.error("Something is wrong");
+		}
+		else{
+			var sessionDriver = JSON.parse(localStorage.getItem('driverData'));
+			if(sessionDriver.phoneNumber === driverData.phoneNumber){
+				sessionDriver.timeStamp = driverData.timeStamp;
+				localStorage.setItem('driverData', JSON.stringify(sessionDriver));
+				console.log("Driver marker added.")
+			}
+		}
 		addDriverMarker(driverData);
 		allDrivers.push(driverData);
+		console.log("Added driver with phoneNumber : " + driverData.phoneNumber);
 	})
 
 	//Remove driver from the map

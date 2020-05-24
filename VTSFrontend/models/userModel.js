@@ -15,7 +15,7 @@ function timeout(timeLeft,bookingId){
 		   const {id} = JSON.parse(localStorage.getItem('userData'));
 		   console.log(id);
 		   if(id === bookingId){
-			   unbook();
+			   localStorage.removeItem('userData');
 			   $('#bookOut').hide();
 			   $('#bookIn').show();
 			   console.log('Session Timed Out');
