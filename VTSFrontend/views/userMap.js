@@ -37,7 +37,8 @@ function initMarkers() {
 			console.log(allDrivers[i]);
 		}
 		else{
-			addMarker(allDrivers[i]);
+			addDriverMarker(allDrivers[i]);
+			console.log("Marker added : "+ allDrivers[i]);
 		}		
 	}
 	//return markers;
@@ -70,30 +71,44 @@ function addMarker(userData){
 	markers.push(markerObj);
 }
 
-// Same as above just made to differentiate user and driverIcons. 
-function addDriverMarker(userData){
-	console.log("Adding driver marker : "+userData.phoneNumber);
+function addDriverMarker(driverData){
+	let contentString;
+	let infowindow;
+	console.log(driverData);
 	marker = new google.maps.Marker({
-		position: userData.location,
+		position: driverData.location,
 		map: map,
 		// types and icons defined in map utilities.
-		icon: driverIcons[types[userData.destination].type].icon
+		icon: "./views/Images/newDriver.png"
 	});
-	if(userData.status!='active'){
-		marker.icon = './views/Images/inactive.png'; 
+	if(driverData.destination == null){
+		console.log("No destination for driver.");
+		driverData.status = 'active';
 	}
 	else{
-	let contentString = '<strong> Destination : </strong>'+'<strong>'+userData.destination+'</strong>';
-
-	let infowindow = new google.maps.InfoWindow({
+		marker.icon = driverIcons[types[driverData.destination].type].icon;
+	}
+	if(driverData.status != 'active'){
+		marker.icon = './views/Images/inactive.png'; 
+		contentString = '<strong> Not Active </strong>';
+	}
+	else{
+		if(driverData.destination !== null){
+			contentString = '<strong> Destination : </strong>'+'<strong>'+driverData.destination+'</strong>';
+		}
+		else{
+			contentString = '<strong> Destination : N.A</strong>';
+		}
+	}
+	console.log(contentString);
+	infowindow = new google.maps.InfoWindow({
 		content: contentString
-	  });
+	});
 	marker.addListener('click', function() {
 		infowindow.open(map, marker);
-	  });
-	}
+	});
 	var markerObj = {
-		phoneNumber : userData.phoneNumber,
+		phoneNumber : driverData.phoneNumber,
 		mark : marker
 	}
 	console.log(markerObj);
@@ -102,16 +117,16 @@ function addDriverMarker(userData){
 
 //Updates Driver Marker Location
 function updateDriverMarker(driverData){
-	console.log(driverData);
+
 	const index = markers.findIndex(marker => marker.phoneNumber == driverData.phoneNumber);
 	//console.log(markers[index]);
 	if(index === -1){
 		console.error("Index not found");
 	}
 	else{
-		markers[index].mark.setMap(driverData.location);
+		markers[index].mark.setPosition(driverData.location);
 		markers[index].mark.position = driverData.location;
-		console.log(`Present location is ${markers[index].mark.position}`);
+		//console.log(`Present location is ${markers[index].mark.position}`);
 	}
 }
 

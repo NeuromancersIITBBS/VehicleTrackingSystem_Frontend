@@ -1,4 +1,5 @@
 $( document).ready( function(){  
+    //localStorage.removeItem('driverData');
     var driverData = JSON.parse(localStorage.getItem('driverData'));
 
     if(driverData !== null){
@@ -39,32 +40,37 @@ $( document).ready( function(){
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(driver),
             success: function(res,data,status,xhr) {
+                console.log("Request sent !!");
                 const driver = res;
                 const driverToken = driver.token;
                 var driverData = {
                     phoneNumber : phoneNumber,
                     token: driverToken,
                     occupancy : null,
-                    destination : "BHR",
+                    destination : null,
+                    status : "active"
                 }
-                $.get("https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572", function(data, status){
-                    const userData = JSON.parse(data);
-                    console.log(userData);
-                    const location = {
-                        lat: userData.latitude,
-                        lng: userData.longitude, 
-                    }
-                    console.log('Login Successful !');
+                $.ajax({
+                    method: "GET",
+                    url: "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572",
+                    success: function(res,status,xhr){
+                        console.log("Location no issues.");
+                        const userData = JSON.parse(res);
+                        console.log(userData);
+                        const location = {
+                            lat: userData.latitude,
+                            lng: userData.longitude, 
+                        }
+                        driverData.location = location;
+                        console.log('Login Successful !');
+                        localStorage.setItem('driverData', JSON.stringify(driverData));
+                        window.location.href = "./indexDriver.html";
+                    },
+                    error: function(xhr) {
+                        console.log("Your location could'nt be found.");
+                        alert("Error");
+                    },
                 });
-                // navigator.geolocation.getCurrentPosition((position) => {
-                //     const location = {
-                //         lat: position.coords.latitude,
-                //         lng: position.coords.longitude, 
-                //     }
-                //     socket.emit('registerDriver', {token, location});
-                // });
-                localStorage.setItem('driverData', JSON.stringify(driverData));
-                window.location.href = "./indexDriver.html";
                 
             },
             error: function(xhr) {

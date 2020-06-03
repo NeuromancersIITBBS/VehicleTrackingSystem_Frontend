@@ -17,8 +17,6 @@ function updateDriverLocation(){
 
 function setupSocketDriver(){
 
-	
-
 	//Storing the base data and adding markers to map.
 	
 	socket.on('connectionResponse', (data) => {
@@ -53,19 +51,21 @@ function setupSocketDriver(){
 
 	//Add new driver marker to map
 	socket.on('addDriver',(driverData)=>{
+		console.log(driverData);
 		if(JSON.parse(localStorage.getItem('driverData'))==null){
 			console.error("Something is wrong");
 		}
 		else{
 			var sessionDriver = JSON.parse(localStorage.getItem('driverData'));
 			if(sessionDriver.phoneNumber === driverData.phoneNumber){
+				console.log('Driver you are marked active in db.');
 				sessionDriver.timeStamp = driverData.timeStamp;
 				localStorage.setItem('driverData', JSON.stringify(sessionDriver));
 				console.log("Driver marker added.")
 			}
+			addDriverMarker(driverData);
+			allDrivers.push(driverData);
 		}
-		addDriverMarker(driverData);
-		allDrivers.push(driverData);
 		console.log("Added driver with phoneNumber : " + driverData.phoneNumber);
 	})
 
@@ -78,7 +78,7 @@ function setupSocketDriver(){
 
 	//Update Location of the driver marker
 	socket.on('updateDriverLocation',(driverData)=>{
-		console.log("Calling updateDriverMarker function.");
+		//console.log("Calling updateDriverMarker function.");
 		updateDriverMarker(driverData);
 	});
 
@@ -87,4 +87,9 @@ function setupSocketDriver(){
 		updateDriverStatus(driverData);
 	});
 
+	socket.on('driverAuthFailed',(data)=> {
+		alert("Session expired please login again.");
+		localStorage.removeItem('driverData');
+		window.location.href = "./driverSignUp.html";	
+	})
 }

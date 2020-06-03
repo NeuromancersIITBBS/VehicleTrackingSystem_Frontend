@@ -113,7 +113,6 @@ function setupSocketUser(){
 
       // Defined in userMap.js adds the markers of users and drivers
       initMarkers();
-      console.log(allUsers);
    });
 
    // add new user to map.

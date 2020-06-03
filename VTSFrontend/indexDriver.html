@@ -79,14 +79,14 @@
 				<label for="occupiedSeats" class="form-control" ><strong>Number of Occupied Seats:</strong></label>
 				<div class="row container-fluid">
 					<button type = button class="btn btn-dark col" id ="incButton" style="margin: 4 30 4 30!important; background-color: #563D7C!important; ">+</button>
-					<input type="number" class="form-control col" id="occupiedSeats" value = 0 min=0 max = 20 style="margin:4!important; ">
+					<input type="number" class="form-control col" id="occupiedSeats" placeholder = "0" value = 0 min=0 max = 20 style="margin:4!important; ">
 					<button type = button class="btn btn-dark col" id ="decButton" style="margin: 4 30 4 30!important; background-color: #563D7C!important; ">-</button>
 				</div>
 			</div>
 			<div class="form-group row" id="size" >
 				<label for="Type" class="form-control col-sm-5 restype"><strong>Select Destination: </strong></label>
-				<select class="form-control col-sm-6 restype" id="bovDestination" name="type" required>
-					<option value="BHR" selected>BHR</option>
+				<select class="form-control col-sm-6 restype" id="bovDestination" aria-placeholder="Select Destination" name="type" required>
+					<option value="BHR">BHR</option>
 					<option value="MHR">MHR</option>
 					<option value="SIF">SIF</option>
 					<option value="LBC">LBC</option>

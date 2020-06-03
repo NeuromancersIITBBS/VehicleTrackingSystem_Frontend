@@ -62,26 +62,41 @@ function addMarker(userData){
 }
 
 function addDriverMarker(driverData){
+	let contentString;
+	let infowindow;
 	console.log(driverData);
 	marker = new google.maps.Marker({
 		position: driverData.location,
 		map: map,
 		// types and icons defined in map utilities.
-		icon: driverIcons[types[driverData.destination].type].icon
+		icon: "./views/Images/newDriver.png"
 	});
-	if(driverData.status!='active'){
-		marker.icon = './views/Images/inactive.png'; 
+	if(driverData.destination == null){
+		console.log("No destination for driver.");
+		driverData.status = 'active';
 	}
 	else{
-	let contentString = '<strong> Destination : </strong>'+'<strong>'+driverData.destination+'</strong>';
-
-	let infowindow = new google.maps.InfoWindow({
+		marker.icon = driverIcons[types[driverData.destination].type].icon;
+	}
+	if(driverData.status != 'active'){
+		marker.icon = './views/Images/inactive.png'; 
+		contentString = '<strong> Not Active </strong>';
+	}
+	else{
+		if(driverData.destination !== null){
+			contentString = '<strong> Destination : </strong>'+'<strong>'+driverData.destination+'</strong>';
+		}
+		else{
+			contentString = '<strong> Destination : N.A</strong>';
+		}
+	}
+	console.log(contentString);
+	infowindow = new google.maps.InfoWindow({
 		content: contentString
-	  });
+	});
 	marker.addListener('click', function() {
 		infowindow.open(map, marker);
-	  });
-	}
+	});
 	var markerObj = {
 		phoneNumber : driverData.phoneNumber,
 		mark : marker
@@ -130,9 +145,9 @@ function updateDriverMarker(driverData){
 		console.error("Index not found");
 	}
 	else{
-		markers[index].mark.setMap(driverData.location);
+		markers[index].mark.setPosition(driverData.location);
 		markers[index].mark.position = driverData.location;
-		console.log(`Present location is ${markers[index].mark.position}`);
+		//console.log(`Present location is ${markers[index].mark.position}`);
 	}
 }
 

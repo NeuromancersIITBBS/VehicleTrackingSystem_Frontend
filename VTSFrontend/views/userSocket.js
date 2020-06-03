@@ -55,17 +55,24 @@ $(document).ready(async function () {
 		$('#bookOut').show();
 		
 		// Get GPS location of User
-		
 		if($('#userLocation').val()==='YourLocation'){
-			$.get("https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572", function(data, status){
-				const userData = JSON.parse(data);
-				pickupObj = {
-					pickupPoint: 'custom',
-					location: {
-						lat: userData.latitude,
-						lng: userData.longitude,
-					}
-				};
+			$.ajax({
+				method: "GET",
+				url: "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572",
+				success: function(res,status,xhr){
+					const userData = JSON.parse(res);
+					pickupObj = {
+						pickupPoint: 'custom',
+						location: {
+							lat: userData.latitude,
+							lng: userData.longitude,
+						}
+					};
+				},
+				error: function(xhr) {
+					console.log("Your location could'nt be found.");
+					alert("Error");
+				},
 			});
 			uniqueId = await bookController(pickupObj);
 		}
@@ -77,7 +84,7 @@ $(document).ready(async function () {
 			};
 			uniqueId = await bookController(pickupObj);
 		}	
-		}
+	  }
 
 	});
 
@@ -85,6 +92,7 @@ $(document).ready(async function () {
 		$('#bookOut').hide();
 		$('#bookIn').show();
 		unbookController();
+		
 	});
 	$('#gotIn').click(function () {
 		$('#bookOut').hide();

@@ -6,6 +6,7 @@ let occupiedSeats;
 let allUsers = [];
 let allDrivers = [];
 let timeGap = 20;
+
 //Dummy Assigning Need to Remove .
 // let driverData={
 // 	phoneNumber : '3759y3457',
@@ -20,13 +21,21 @@ let timeGap = 20;
 // };
 
 //function call in driverMap.js
+
+var driverData = JSON.parse(localStorage.getItem('driverData'));
+
+if(driverData == null){
+	console.log("At driver page local storage empty");
+	window.location.href = "./driverSignUp.html";	
+}
+
 function after_init_map_driver(){
 	console.log('Init map is executed');
 $(document).ready(async function () {
 
-	//localStorage.getItem('driverData');
+	//localStorage.removeItem('driverData');
+	
 	var driverData = JSON.parse(localStorage.getItem('driverData'));
-
 	if(driverData == null){
 		console.log("At driver page local storage empty");
 		window.location.href = "./driverSignUp.html";	
@@ -34,11 +43,17 @@ $(document).ready(async function () {
 	else{
 		var token = driverData.token;
 		var location = driverData.location;
-		socket.emit('registerDriver', {token, location});
 		// Send the request for base data
 		socket.emit('onConnection');
+
 		// The socket respones are in driverModel.js
+		socket.emit('registerDriver', {token, location});
+		console.log("Request for activating driver.");
+
+		//addDriverMarker(driverData);
+		
 		if(driverData.destination !== null){
+
 			driverData = JSON.parse(localStorage.getItem('driverData'));
 			console.log("Session recovered, phoneNumber is "+driverData.phoneNumber+"!!")
 			$('#occupiedSeats').parent().find("input").val(driverData.occupiedSeats);
@@ -52,18 +67,25 @@ $(document).ready(async function () {
 	//routine to update Loction after every timeGap seconds
 	//needs to be tested
 	setInterval(()=>{
-		$.get("https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572", function(data, status){
-			const userData = JSON.parse(data);
-			const location = {
-				lat: userData.latitude,
-				lng: userData.longitude, 
-			}
-			var driverData = JSON.parse(localStorage.getItem('driverData'));
-			driverData.location = location;
-			localStorage.setItem('driverData', JSON.stringify(driverData));
-			updateDriverLocationController();
-		})
-		
+		$.ajax({
+			method: "GET",
+			url: "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572",
+			success: function(res,status,xhr){
+				const userData = JSON.parse(res);
+				const location = {
+					lat: userData.latitude,
+					lng: userData.longitude, 
+				}
+				var driverData = JSON.parse(localStorage.getItem('driverData'));
+				driverData.location = location;
+				localStorage.setItem('driverData', JSON.stringify(driverData));
+				updateDriverLocationController();
+			},
+			error: function(xhr) {
+				console.log("Your location could'nt be found.");
+				alert("Error");
+			},
+		});		
 	},timeGap*1000); 
 
 	$('#updateDriverInfoBtn').click(()=>{
@@ -71,14 +93,23 @@ $(document).ready(async function () {
 		// 	localStorage.removeItem('driverData');
 		// }
 		var driverData = JSON.parse(localStorage.getItem('driverData'));
-		$.get("https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572", function(data, status){
-			const userData = JSON.parse(data);
-			const location = {
-				lat: userData.latitude,
-				lng: userData.longitude, 
-			}
-			driverData.location = location;
-		})
+		$.ajax({
+			method: "GET",
+			url: "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572",
+			success: function(res,status,xhr){
+				const userData = JSON.parse(res);
+				console.log(userData);
+				const location = {
+					lat: userData.latitude,
+					lng: userData.longitude, 
+				}
+				driverData.location = location;
+			},
+			error: function(xhr) {
+				console.log("Your location could'nt be found.");
+				alert("Error");
+			},
+		});
 		driverData.destination= $("#bovDestination").val();
 		driverData.status= $("#status").val();
 		driverData.occupiedSeats= $("#occupiedSeats").val();
@@ -96,11 +127,12 @@ $(document).ready(async function () {
 		var driverData = JSON.parse(localStorage.getItem('driverData'));
 		$.ajax({
             type: 'POST',
-            url: 'https://vts189.herokuapp.com/logout',
+            url: 'https://vts189.herokuapp.com/vts/new_driver/logout',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(driverData),
             success: function(data, status, xhr){
                 if(JSON.parse(localStorage.getItem('driverData'))!=null){
+					console.log("Removing driverData from local storage..");
 					localStorage.removeItem('driverData');
 				}
 				console.log("Driver logged out");
