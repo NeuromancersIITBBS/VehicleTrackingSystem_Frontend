@@ -1,0 +1,87 @@
+form{
+    margin-bottom : 0em;
+}
+/* label{
+    margin-bottom : 0em;
+} */
+#navBar {
+    width: 100%;
+    height: 6.1vh;
+    margin-left: 0px;
+    border: 0px;
+    position: sticky;
+    z-index: 1;
+}
+
+#login{
+    margin-bottom: 25px;
+    background-color: #563D7C!important;
+}
+
+#registerBtn{
+    margin-bottom: 25px;
+    background-color: #563D7C!important;
+}
+/* 
+#signUp{
+    margin-bottom: 25px;
+    background-color: #563D7C!important;
+} */
+
+/* #loginPage {
+    background-color: #563D7C!important; 
+} */
+a {
+    font-weight: bold;
+}
+a:hover {
+    cursor:pointer;
+}
+a:visited {
+    
+    color:  #563D7C;
+   }
+.form-group {
+    margin-bottom: 0.1px;
+}
+p{
+    font-weight: bold;
+
+}
+.row {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.container-fluid{
+    width: 60%;
+    padding-left : inherit;
+    padding-right :inherit;
+}
+
+.buttons{padding:20px 0 0 140px;
+    background-color: #563D7C!important;}
+    
+input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+    
+h4 {
+    text-align : center!important;
+    margin-bottom: 50px!important;
+}
+label{
+    font-weight: bold;
+}
+input{
+    margin : 4px;
+    margin-bottom:10px;
+    padding:4px;
+    padding-left:20px;
+}
+html,body{
+            font-size :2vh;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+    }

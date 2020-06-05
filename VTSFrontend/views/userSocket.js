@@ -92,7 +92,6 @@ $(document).ready(async function () {
 		$('#bookOut').hide();
 		$('#bookIn').show();
 		unbookController();
-		
 	});
 	$('#gotIn').click(function () {
 		$('#bookOut').hide();

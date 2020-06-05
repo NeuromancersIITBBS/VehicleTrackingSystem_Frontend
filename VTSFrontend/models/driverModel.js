@@ -89,6 +89,7 @@ function setupSocketDriver(){
 
 	socket.on('driverAuthFailed',(data)=> {
 		alert("Session expired please login again.");
+		// Might need to add socket event to remove driver need to cross-check...
 		localStorage.removeItem('driverData');
 		window.location.href = "./driverSignUp.html";	
 	})

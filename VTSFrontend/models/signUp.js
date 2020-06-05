@@ -1,4 +1,9 @@
 $( document).ready( function(){  
+
+    if(JSON.parse(localStorage.getItem('signUp'))==1){
+        $('#loginDisplay').hide();
+        $('#signUpDisplay').show();
+    }
     //localStorage.removeItem('driverData');
     var driverData = JSON.parse(localStorage.getItem('driverData'));
 
@@ -8,6 +13,22 @@ $( document).ready( function(){
         return;
 	}  
     console.log("Page reloaded");
+
+    //SignUp/Login Event Listeners
+    $('#signUp').click( async function(event){
+        event.preventDefault();
+        $('#loginDisplay').hide();
+        $('#signUpDisplay').show();
+        localStorage.setItem('signUp',1);
+    });
+
+    $('#loginPage').click( async function(event){
+        event.preventDefault();
+        $('#signUpDisplay').hide();
+        $('#loginDisplay').show();
+        localStorage.setItem('signUp',0);
+    });
+
     $("#registerBtn").click( async function(event){
         event.preventDefault();
         var driverName = $("#driverName").val();

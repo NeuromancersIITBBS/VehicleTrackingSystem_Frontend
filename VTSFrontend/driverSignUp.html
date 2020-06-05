@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
-    
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -11,13 +11,17 @@
     <!--View-->
     <!-- <script src="./views/driverSocket.js"></script> -->
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    
     <!--Model -->
     <script src="./models/signUp.js"></script>
     <!-- <script src="./models/driverModel.js"></script> -->
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    s
+    
     <title>Vehicle Tracking System</title>
+
+    <link rel="stylesheet" type="text/css" href="./public/driverSignupstylesheet.css">
 </head>
 
 <body>
@@ -71,37 +75,41 @@
             -->
         <br>
     <div class="container">
-        <div class="row">
-            
-            <div class="col-md-6 offset-3 my-2" id="logindiv">
-                <h4 class="h4">Login</h4>
-                <form>
+        <div class="row align-items-center" id="loginDisplay">
+            <div class="col" id="logindiv">
+                <h4 class="h4" style="text-align: center;">Login</h4>
+                <form class = "form-group">
                     <label for="Phone Number">Phone Number : </label>
-                    <input id="phoneNumber" placeholder="Phone Number" type="text" style="margin-bottom:10px;padding:4px;padding-left:20px;" required/><br>
+                    <input id="phoneNumber" class = "form-control" placeholder="Phone Number" type="text" required/><br>
                     <label for="password">Password : </label>
-                    <input id="pass" placeholder="password" type="password" style="margin-bottom:10px;padding:4px;padding-left:20px;" required/><br>
-                    <button id = "login" class="btn btn-primary" style="margin-left: 150px;">Login</button>
+                    <input id="pass" class = "form-control" placeholder="Password" type="password" required/><br>
+                    <div class = "row">
+                        <div class = "col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+                        </div>
+                    </div>
+                    <button id ="login" class="btn btn-primary form-control">Login</button>
                 </form>  
-                <p style="margin-left:160px">Or </p>
-                    <button class="btn btn-primary" id="register" style="margin-left: 140px;">Register</button>
+                <p style="display: inline-block;">New User? </p>
+                <a href="#" id = "signUp" ><u>Click here to SignUp.</u></a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 offset-3 my-2" id="signupdiv">
-                <form id="signup" >
+        <div class="row align-items-center" id="signUpDisplay" style="display:none">
+            <div class="col" id="signupdiv">
+                <form class = "form-group">
                     <div>
                         <h4 class="h4">Sign Up</h4>
-                        <label for="Name" >Your Name : </label>
-                        <input  type="text" id ="driverName" style="margin-bottom:10px;padding:4px;padding-left:20px;" placeholder="Your name" required><br>
+                        <label for="Name" >Name : </label>
+                        <input  class = "form-control" type="text" id ="driverName" placeholder="Your name" required><br>
                         <label for="phoneNo">Phone Number : </label>
-                        <input type="text" id ="phoneNumber"style="margin-bottom:10px;padding:4px;padding-left:20px;"placeholder="Your phone number" required><br>
+                        <input class = "form-control" type="text" id ="phoneNumber" placeholder="Your phone number" required><br>
                         <label for="password">Password : </label>
-                        <input type="password" id ="password"  style="margin-bottom:10px;padding:4px;padding-left:20px;" placeholder="Set password" required><br>
+                        <input class = "form-control" type="password" id ="password" placeholder="Set password" required><br>
                       </div>
-                    <button id="registerBtn"  style="margin-left: 150px;" class="btn btn-primary">Submit</button>
+                    <button id="registerBtn" class="btn btn-primary form-control">Submit</button>
                 </form>
-                <p style="margin-left:160px">Or </p>
-                <button class="btn btn-primary" id="login" style="margin-left: 150px;">Login</button>
+                <p style="display: inline-block;">Already Registered ? </p>
+                <a id="loginPage" href="#" ><u>Login</u></a>
             </div>
         </div>
     </div>
